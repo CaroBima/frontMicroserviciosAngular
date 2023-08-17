@@ -23,6 +23,8 @@
       "dom"
     ]
   },
+  
+  //"exclude": ["node_modules", "**/*.spec.ts"],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
