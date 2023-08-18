@@ -1,0 +1,19 @@
+footer {
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+    width: 100%;
+  }
+
+.iconos {
+    width: 5% !important;
+    max-width: 3em !important;
+    min-width: 3em !important;
+  }
+  
+  .tamanio-30 {
+    max-width: 30% !important;
+    display: block !important;
+    margin: 10px auto !important;
+    min-width: 10em;
+  }

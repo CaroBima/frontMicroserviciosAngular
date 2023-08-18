@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
+  anio: number;
+  whatsapp: string;
+  telegram: string;
+  constructor() {
+    this.anio = new Date().getFullYear();
+    this.whatsapp = '';
+    this.telegram = '';
   }
 
+  ngOnInit(): void {}
 }
+
