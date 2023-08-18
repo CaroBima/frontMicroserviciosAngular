@@ -34,5 +34,9 @@ export class UsersService {
     const token = this.getToken();
     // Agregar endpoint que devuelve el usuario para el token
   }
+
+  logout(){
+    this.cookies.delete("token");
+  }
   
 }
