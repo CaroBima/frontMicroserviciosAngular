@@ -20,14 +20,5 @@ export class DashboardComponent implements OnInit {
       authorities: this.tokenService.getAuthorities()
     };
   }
-  /*
-  constructor(public userService: UsersService) {}
-  ngOnInit() {
-    this.getUserLogged();
-  }
-  getUserLogged() {
-    this.userService.getUser().subscribe((user) => {
-      console.log(user);
-    });
-  }*/
+
 }

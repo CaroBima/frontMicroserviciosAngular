@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
+  nomUsu? : string; 
+
   form: any = {};
   usuario: LoginUsuario | undefined; 
   isLogged = false;
@@ -25,14 +27,14 @@ export class LoginComponent implements OnInit {
       this.isLogged = true;
       this.isLoginFail = false;
       this.roles = this.tokenService.getAuthorities();
+      this.nomUsu = this.tokenService.getUserName();
     }
   }
 
   onLogin(): void {
     this.usuario = new LoginUsuario(this.form.nombreUsuario, this.form.password);
-
+    this.nomUsu = this.usuario.nombreUsuario;
     this.authService.login(this.usuario).subscribe(response => {
-      console.log(response, response.data["token"]);
       if (response && response.data["token"]) {
         // Guardar el token en el servicio de tokens
         this.tokenService.setToken(response.data["token"]);
@@ -45,9 +47,7 @@ export class LoginComponent implements OnInit {
     
         this.isLogged = true;
         this.isLoginFail = false;
-        console.log("llega hasta this roles")
         this.roles = ["USER"] //this.tokenService.getAuthorities();
-        console.log("pasa this roles y llega antes del reload")
         window.location.reload();
       } else {
         // Manejar el caso en el que el token no está presente en la respuesta.
@@ -61,5 +61,7 @@ export class LoginComponent implements OnInit {
       this.isLoginFail = true;
       this.errorMsg = err.error.message;
     });
-   }
+  }
+   
+  
 }

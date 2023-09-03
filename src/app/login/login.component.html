@@ -2,13 +2,14 @@
   <div class="row justify-content-md-center mt-4 mb-4 pt-4 pb-4">
     <div class="col-md-6">
       <div *ngIf="isLogged; else loggedOut">
-        Has iniciado sesión como: {{ roles }}
+        Has iniciado sesión como: {{nomUsu}}
       </div>
 
       <ng-template #loggedOut>
         <div *ngIf="!isLogged" class="container">
           <h5>Iniciar Sesión</h5>
           <form name="form" #f="ngForm" novalidate (ngSubmit)="onLogin()">
+            <div class="mb-3">
             <div class="form-group">
               <label for="nombreUsuario">Nombre de Usuario: </label>
               <input type="text" class="form-control" name="nombreusuario" [(ngModel)]="form.nombreUsuario"
@@ -23,8 +24,9 @@
               <button type="submit" class="btn btn-success" [disabled]="!f.valid">Login</button>
               <div *ngIf="f.submitted && isLoginFail" class="alert alert-danger mt-3">Fail al loguearse: {{ errorMsg }}
               </div>
-              <a routerLink="/registro"><button class="btn btn-primary float-right">Crear Cuenta</button></a>
+              <a routerLink="/registro"><button class="btn btn-primary float-right m-3">Crear Cuenta</button></a>
               <p class="float-right mr-3">¿No tienes cuenta?</p>
+            </div>
             </div>
           </form>
         </div>
