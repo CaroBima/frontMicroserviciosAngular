@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  email!: string;
+  nombreUsuario!: string;
   password!: string;
   confirmPassword!: string;
   passwordError!: boolean;
@@ -20,7 +20,7 @@ export class RegisterComponent implements OnInit {
 
 
   register() {
-    const user = { email: this.email, password: this.password };
+    const user = { email: this.nombreUsuario, password: this.password };
     this.userService.register(user).subscribe(data => {
       this.userService.setToken(data.token);
       this.router.navigateByUrl("/");
