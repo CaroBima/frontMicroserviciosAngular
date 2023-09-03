@@ -1,14 +1,15 @@
-export class JwtModel {
-    token: string;
-    type: string;
-    nombreUsuario: string;
-    authorities: string[];
+import { Data } from "@angular/router";
 
-    constructor(token: string, type: string, nombreUsuario: string, authorities: string[]) {
-        this.token = token;
-        this.type =type;
-        this.nombreUsuario = nombreUsuario;
+export class JwtModel {
+   data : Data;
+   message : string; 
+   authorities: string[];
+   
+   constructor(data: Data, message: string, authorities : string[]){
+        this.data = data;
+        this.message = message;
         this.authorities = authorities;
-        
-    }
+   }
 }
+   
+

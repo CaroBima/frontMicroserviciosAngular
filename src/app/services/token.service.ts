@@ -20,7 +20,8 @@ export class TokenService {
 
   public getToken(): string {
     const token = sessionStorage.getItem(TOKEN_KEY);
-    return token !== null ? token : ''; // Devuelve una cadena vacía si el token es nulo.
+    return token!;
+    //return token !== null ? token : ''; // Devuelve una cadena vacía si el token es nulo.
   }
   
 
@@ -36,7 +37,8 @@ export class TokenService {
 
   public setAuthorities(authorities: string[]): void {
     window.sessionStorage.removeItem(AUTHORITIES_KEY);
-    window.sessionStorage.setItem(AUTHORITIES_KEY, JSON.stringify(authorities));
+    window.sessionStorage.setItem(AUTHORITIES_KEY, JSON.stringify(["USER"]));
+    //window.sessionStorage.setItem(AUTHORITIES_KEY, JSON.stringify(authorities));
   }
 
   public getAuthorities(): string[] {

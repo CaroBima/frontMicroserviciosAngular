@@ -31,56 +31,35 @@ export class LoginComponent implements OnInit {
   onLogin(): void {
     this.usuario = new LoginUsuario(this.form.nombreUsuario, this.form.password);
 
-    this.authService.login(this.usuario).subscribe(data => {
-      this.tokenService.setToken(data.token);
-      this.tokenService.setUserName(data.nombreUsuario);
-      this.tokenService.setAuthorities(data.authorities);
-
-      this.isLogged = true;
-      this.isLoginFail = false;
-      this.roles = this.tokenService.getAuthorities();
-      window.location.reload();
-    },
-      (err: any) => {
+    this.authService.login(this.usuario).subscribe(response => {
+      console.log(response, response.data["token"]);
+      if (response && response.data["token"]) {
+        // Guardar el token en el servicio de tokens
+        this.tokenService.setToken(response.data["token"]);
+        
+        // Guardar el nombre de usuario en el servicio de tokens
+        this.tokenService.setUserName(response.data["nombreUsuario"]);
+        
+        // Guardar las autoridades en el servicio de tokens
+        this.tokenService.setAuthorities(response.authorities);
+    
+        this.isLogged = true;
+        this.isLoginFail = false;
+        console.log("llega hasta this roles")
+        this.roles = ["USER"] //this.tokenService.getAuthorities();
+        console.log("pasa this roles y llega antes del reload")
+        window.location.reload();
+      } else {
+        // Manejar el caso en el que el token no está presente en la respuesta.
         this.isLogged = false;
         this.isLoginFail = true;
-        this.errorMsg = err.error.message;
+        this.errorMsg = 'Token no encontrado en la respuesta.';
       }
-    );
-  }
-
+    },
+    (err: any) => {
+      this.isLogged = false;
+      this.isLoginFail = true;
+      this.errorMsg = err.error.message;
+    });
+   }
 }
-/*
-import { Component, OnInit } from '@angular/core';
-import { UsersService } from '../services/users.service';
-import { Router } from '@angular/router';
-
-@Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
-})
-export class LoginComponent implements OnInit {
-  email!: string;
-  password!: string;
-
-  constructor(public userService: UsersService, public router: Router) { }
-
-  ngOnInit(): void {
-  }
-
-  login() {
-    const user = { email: this.email, password: this.password };
-    this.userService.login(user).subscribe(
-      data => {
-        this.userService.setToken(data.token);
-        this.router.navigateByUrl('/');
-      },
-      error => {
-        console.log(error);
-      });
-  }
-
-  
-}
-*/

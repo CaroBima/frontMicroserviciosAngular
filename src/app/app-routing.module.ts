@@ -10,6 +10,8 @@ const routes: Routes = [
 { path: "login", component: LoginComponent, pathMatch: "full" },
 { path: "register", component: RegisterComponent, pathMatch: "full"},
 { path: "**", component: DashboardComponent, pathMatch: "full"},
+{path: '', component: DashboardComponent},
+{path: 'home', component: DashboardComponent},
 ];
 
 
