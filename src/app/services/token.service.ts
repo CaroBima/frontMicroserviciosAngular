@@ -52,6 +52,7 @@ export class TokenService {
   }
 
   public logOut(): void {
+    console.log("entra al servicio");
     window.sessionStorage.clear();
   }
 }

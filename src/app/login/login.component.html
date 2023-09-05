@@ -1,12 +1,15 @@
 <div class="login mt-4 ms-4 mb-4">
   <div class="row justify-content-md-center mt-4 mb-4 pt-4 pb-4">
     <div class="col-md-6">
-      <div *ngIf="isLogged; else loggedOut">
-        Has iniciado sesión como: {{nomUsu}}
+      <div *ngIf="isLogged; else loggedOut" class="container-fluid">
+        <div class="m-3">
+          <h5>Has iniciado sesión como: {{nomUsu}}</h5>
+          <button type="button" class="btn btn-success m-3" (click)="onLogout()">Cerrar Sesión</button> 
+        </div>
       </div>
 
       <ng-template #loggedOut>
-        <div *ngIf="!isLogged" class="container">
+        <div *ngIf="!isLogged" class="container-fluid">
           <h5>Iniciar Sesión</h5>
           <form name="form" #f="ngForm" novalidate (ngSubmit)="onLogin()">
             <div class="mb-3">

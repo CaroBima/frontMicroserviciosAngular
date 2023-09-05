@@ -23,4 +23,5 @@ export class AuthService {
   public registro(usuario: NuevoUsuario): Observable<any> {
     return this.httpClient.post<any>(this.authURL + 'register', usuario, cabecera);
   }
+
 }

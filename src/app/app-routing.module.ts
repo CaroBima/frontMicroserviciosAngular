@@ -4,14 +4,15 @@ import { LoginComponent } from './login/login.component';
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './register/register.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { GuardGuard } from './guards/guard.guard';
 
 const routes: Routes = [  
 //{ path: "", component: AppComponent, pathMatch: "full" },
 { path: "login", component: LoginComponent, pathMatch: "full" },
-{ path: "registro", component: RegisterComponent, pathMatch: "full"},
-{ path: "**", component: DashboardComponent, pathMatch: "full"},
-{path: '', component: DashboardComponent},
-{path: 'home', component: DashboardComponent},
+{ path: "registro", component: RegisterComponent, pathMatch: "full", canActivate: [GuardGuard]},
+{ path: "**", component: DashboardComponent, pathMatch: "full", canActivate: [GuardGuard]},
+{path: '', component: DashboardComponent, canActivate: [GuardGuard]},
+{path: 'home', component: DashboardComponent, canActivate: [GuardGuard]},
 ];
 
 

@@ -1,23 +1,22 @@
 <div class="login mt-4 ms-4 mb-4 container-fluid">
   <div class="row justify-content-md-center mt-4 mb-4 pt-4 pb-4">
-    
     <div class="col-md-6">
       <div class="register">  
         <form class="custom-form col-md-6" method="post">
           <h5>Registrarse</h5>
           
             <div class="form-group mb-3">
-            <input type="text" class="m-control"  [(ngModel)]="nombreUsuario" name="nombreUsu" placeholder="Nombre de usuario" required="required" />
+            <input type="text" class="form-control"  [(ngModel)]="nombreUsuario" name="nombreUsu" placeholder="Nombre de usuario" required="required" />
           </div>
           
           <div class="form-group  mb-3">
-            <input type="password" class="form-control" [(ngModel)]="password" name="password" placeholder="Password" required="required" />
+            <input type="password" class="form-control" [(ngModel)]="password" name="password" placeholder="Contraseña" required="required" />
           </div>
           <div class="form-group mb-3">
-            <input type="password"  class="form-control"  [(ngModel)]="confirmPassword" name="password" placeholder="Repeat the password"
+            <input type="password"  class="form-control"  [(ngModel)]="confirmPassword" name="password" placeholder="Repetir la contraseña"
               required="required" />
           </div>
-          <button type="submit" class="btn btn-success" (click)="register()">Register</button>
+          <button type="submit" class="btn btn-success" (click)="register()">Registrarse</button>
         </form>
       </div>
     </div>

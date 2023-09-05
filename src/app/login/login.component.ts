@@ -49,6 +49,7 @@ export class LoginComponent implements OnInit {
         this.isLoginFail = false;
         this.roles = ["USER"] //this.tokenService.getAuthorities();
         window.location.reload();
+        
       } else {
         // Manejar el caso en el que el token no está presente en la respuesta.
         this.isLogged = false;
@@ -63,5 +64,13 @@ export class LoginComponent implements OnInit {
     });
   }
    
+  onLogout() : void{
+    console.log(this.nomUsu);
+    console.log("entra al logout");
+    this.tokenService.logOut();
+    this.isLogged = false;
+    this.isLoginFail = true;
+    console.log(this.nomUsu);
+  }
   
 }
