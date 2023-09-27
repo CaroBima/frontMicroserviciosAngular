@@ -28,6 +28,8 @@ export class LoginComponent implements OnInit {
       this.isLoginFail = false;
       this.roles = this.tokenService.getAuthorities();
       this.nomUsu = this.tokenService.getUserName();
+      this.router.navigate(['/home']); //si el usuario está logueado redirecciona al home
+     
     }
   }
 
@@ -72,5 +74,6 @@ export class LoginComponent implements OnInit {
     this.isLoginFail = true;
     console.log(this.nomUsu);
   }
+  
   
 }
