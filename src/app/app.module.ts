@@ -11,6 +11,7 @@ import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CookieService } from "ngx-cookie-service";
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { CookieService } from "ngx-cookie-service";
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    NoopAnimationsModule,
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]
