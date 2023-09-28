@@ -38,7 +38,7 @@
           -->
         <!-- Login -->
         <div *ngIf="info.token; else loggedOut">
-          <div class="container">
+          <div class="container-fluid me-5">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
@@ -58,7 +58,7 @@
           </div>
         </div>
         <ng-template #loggedOut>
-          <div class="container">
+          <div class="container-fluid me-5">
             No has iniciado sesión
             <!-- svg Log out -->
             <svg xmlns="http://www.w3.org/2000/svg" height="2em" class="ms-1"
