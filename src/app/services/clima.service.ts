@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { API_URL } from '../configuracion';
+import { Observable } from 'rxjs';
+import { Clima } from '../models/clima-model';
+import { TokenService } from './token.service';
 
 const urlConst = `${API_URL}`;
 
@@ -11,9 +14,30 @@ const urlConst = `${API_URL}`;
 export class ClimaService {
   
   private url;
+  private token : string;
 
-  constructor(private http: HttpClient) {
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, HEAD, OPTIONS',
+    }),
+  };
+
+
+  constructor(private http: HttpClient, tokenService : TokenService) {
     this.url = urlConst;
+    this.token = tokenService.getToken();
+    this.httpOptions.headers = this.httpOptions.headers.set('Authorization', 'Bearer ' + this.token);
+  }
+
+
+
+
+  //devuelve todos los cursos almacenados en la bbdd
+  public getClima(): Observable<Clima> {
+    let endpoint = this.url + '/clima?ciudad=La Quiaca';
+    return this.http.get<Clima>(endpoint, this.httpOptions);
   }
 
 }

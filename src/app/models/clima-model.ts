@@ -1,4 +1,4 @@
-export class clima{
+export class Clima{
     name : string;
     country : string;
     region : string;

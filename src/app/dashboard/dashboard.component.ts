@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../services/users.service';
 import { TokenService } from '../services/token.service';
+import { ClimaService } from '../services/clima.service';
+import { Clima } from '../models/clima-model';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,8 +12,9 @@ import { TokenService } from '../services/token.service';
 export class DashboardComponent implements OnInit {
 
   info: any = {};
+  clima? : Clima;
 
-  constructor(private tokenService: TokenService) { }
+  constructor(private tokenService: TokenService, private climaService: ClimaService) { }
 
   ngOnInit() {
     this.info = {
@@ -19,6 +22,14 @@ export class DashboardComponent implements OnInit {
       nombreUsuario: this.tokenService.getUserName(),
       authorities: this.tokenService.getAuthorities()
     };
+    this.getClima();
   }
 
+  getClima(){
+    this.climaService.getClima().subscribe((respuesta) => {
+      this.clima = respuesta;
+    });
+    console.log(this.clima);
+  }
+  
 }
