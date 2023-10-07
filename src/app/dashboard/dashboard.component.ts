@@ -3,6 +3,8 @@ import { UsersService } from '../services/users.service';
 import { TokenService } from '../services/token.service';
 import { ClimaService } from '../services/clima.service';
 import { Clima } from '../models/clima-model';
+import { ProgramasCulturaService } from '../services/programas-cultura.service';
+import { Cultura } from '../models/cultura-model';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,11 +15,12 @@ export class DashboardComponent implements OnInit {
 
   info: any = {};
   clima? : Clima;
+  programasCultura : Cultura[] = [];
   inputCiudad : String = ''; 
   inputPais : String = '';
  
 
-  constructor(private tokenService: TokenService, private climaService: ClimaService) { }
+  constructor(private tokenService: TokenService, private climaService: ClimaService, private culturaService : ProgramasCulturaService) { }
 
   ngOnInit() {
     this.info = {
@@ -31,6 +34,7 @@ export class DashboardComponent implements OnInit {
         this.clima = respuesta;
       });
   
+      this.getCultura();
   }
 
   //Permite obtener el clima para una determinada ciudad
@@ -39,10 +43,16 @@ export class DashboardComponent implements OnInit {
     this.climaService.getClima(ciudadYPais).subscribe((respuesta) => {
       this.clima = respuesta;
     });
+  }
 
-  
-    
-    
+  getCultura(){
+      this.culturaService.getProgramasCultura().subscribe((evento)=>{
+        evento.forEach((x) => {
+          this.programasCultura.push(x);
+        });
+        return evento;
+      });
+      console.log(this.programasCultura);
   }
   
 }

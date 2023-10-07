@@ -32,9 +32,9 @@ export class ProgramasCulturaService {
   }
 
 
-  public getProgramasCultura(): Observable<Cultura> {
+  public getProgramasCultura(): Observable<Cultura[]> {
     let endpoint = this.url + '/programas';
-    return this.http.get<Cultura>(endpoint, this.httpOptions);
+    return this.http.get<Cultura[]>(endpoint, this.httpOptions);
   }
 
 }
