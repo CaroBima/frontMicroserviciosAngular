@@ -41,10 +41,17 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p>Consulta </p>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="inputCiudad" placeholder="Ciudad" [(ngModel)]="inputCiudad" name="inputCiudad">
+                    <label for="inputCiudad">Ciudad</label>
+                  </div>
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="inputPais" placeholder="País" [(ngModel)]="inputPais" name="inputPais">
+                    <label for="inputPais">Pais</label>
+                  </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="getClima('La Rioja')">Consultar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="getClima(inputCiudad, inputCiudad)">Consultar</button>
             </div>
         </div>
     </div>

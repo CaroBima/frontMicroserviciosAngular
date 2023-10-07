@@ -13,6 +13,8 @@ export class DashboardComponent implements OnInit {
 
   info: any = {};
   clima? : Clima;
+  inputCiudad : String = ''; 
+  inputPais : String = '';
  
 
   constructor(private tokenService: TokenService, private climaService: ClimaService) { }
@@ -32,9 +34,9 @@ export class DashboardComponent implements OnInit {
   }
 
   //Permite obtener el clima para una determinada ciudad
-  getClima(ciudad : String){
-    console.log("entra a getclima con param");
-    this.climaService.getClima(ciudad).subscribe((respuesta) => {
+  getClima(ciudad : String, pais : String){
+    const ciudadYPais = ciudad + ', ' + pais;
+    this.climaService.getClima(ciudadYPais).subscribe((respuesta) => {
       this.clima = respuesta;
     });
 
