@@ -1,21 +1,20 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { API_URL } from '../configuracion';
-import { Observable } from 'rxjs';
-import { Clima } from '../models/clima-model';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { TokenService } from './token.service';
+import { Cultura } from '../models/cultura-model';
+import { Observable } from 'rxjs';
 
 const urlConst = `${API_URL}`;
 
 @Injectable({
   providedIn: 'root'
 })
-
-export class ClimaService {
-  
+export class ProgramasCulturaService {
+   
   private url;
   private token : string;
-  //private ciudad : String = 'Córdoba, Argentina';
+  
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -33,13 +32,9 @@ export class ClimaService {
   }
 
 
-
-
-  //devuelve todos los cursos almacenados en la bbdd
-  public getClima(ciudad? : String): Observable<Clima> {
-    ciudad = ciudad || "Cordoba, Argentina";
-    let endpoint = this.url + '/clima?ciudad='+ ciudad;
-    return this.http.get<Clima>(endpoint, this.httpOptions);
+  public getProgramasCultura(): Observable<Cultura> {
+    let endpoint = this.url + '/programas';
+    return this.http.get<Cultura>(endpoint, this.httpOptions);
   }
 
 }
