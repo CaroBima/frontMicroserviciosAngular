@@ -1,32 +1,37 @@
 <div class="container-fluid m-4">
 
-                <!--     Cards      -->
-    <div class="row justify-content-center">
+    <!--     Cards      -->
+    <div class="row justify-content-end me-5">
         <div class="card" style="width: 18rem;">
             <img src="../../assets/img/cat3.jpeg" class="card-img-top" alt="...">
             <div class="card-body">
-                <h5 class="card-title mb-3"><img src="../../assets/img/icons/brightness-high-fill.svg"> El clima en {{this.clima?.region}} <img src="../../assets/img/icons/brightness-high-fill.svg"></h5>
+                <h5 class="card-title mb-3"><img src="../../assets/img/icons/brightness-high-fill.svg"> El clima en
+                    {{this.clima?.region}} <img src="../../assets/img/icons/brightness-high-fill.svg"></h5>
                 <p class="card-text">Temperatura: {{this.clima?.tempC}}°C</p>
                 <p class="card-text">Sensación térmica: {{this.clima?.feelslikeC}}</p>
                 <p class="card-text">Humedad: {{this.clima?.humidity}}</p>
                 <p class="card-text">Viento: {{this.clima?.windKph}}km/h</p>
                 <p class="card-text">Última actualización: {{this.clima?.lastUpdated}}</p>
-                
+
             </div>
-            <div class="card-footer justify-content-md-center">
-                <button class="btn btn-primary justify-content-md-center"  data-bs-toggle="modal"
-                data-bs-target="#exampleModal">Cambiar ciudad</button>
-            </div>
-        </div>
-        <div class="card" style="width: 18rem;">
-            <img src="../../assets/img/cat1.jpeg" class="card-img-top" alt="...">
-            <div class="card-body ">
-                <h5 class="card-title mb-3">Gato 2</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+            <div class="card-footer">
+                <div class="d-grid gap-2 col-12 mx-auto">
+                <button class="btn btn-secondary justify-content-md-center" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal">Cambiar ciudad</button>
+                </div>
             </div>
         </div>
+        <!-- Otra card
+            <div class="card" style="width: 18rem;">
+                <img src="../../assets/img/cat1.jpeg" class="card-img-top" alt="...">
+                <div class="card-body ">
+                    <h5 class="card-title mb-3">Gato 2</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div> 
+        -->
     </div>
 </div>
 <!-- Modal para ingresar una ciudad -->
@@ -42,16 +47,19 @@
             </div>
             <div class="modal-body">
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="inputCiudad" placeholder="Ciudad" [(ngModel)]="inputCiudad" name="inputCiudad">
+                    <input type="text" class="form-control" id="inputCiudad" placeholder="Ciudad"
+                        [(ngModel)]="inputCiudad" name="inputCiudad">
                     <label for="inputCiudad">Ciudad</label>
-                  </div>
-                  <div class="form-floating">
-                    <input type="text" class="form-control" id="inputPais" placeholder="País" [(ngModel)]="inputPais" name="inputPais">
+                </div>
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="inputPais" placeholder="País" [(ngModel)]="inputPais"
+                        name="inputPais">
                     <label for="inputPais">Pais</label>
-                  </div>
+                </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="getClima(inputCiudad, inputCiudad)">Consultar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                    (click)="getClima(inputCiudad, inputPais)">Consultar</button>
             </div>
         </div>
     </div>
