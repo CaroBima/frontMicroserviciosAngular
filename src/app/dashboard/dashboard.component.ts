@@ -13,6 +13,7 @@ export class DashboardComponent implements OnInit {
 
   info: any = {};
   clima? : Clima;
+ 
 
   constructor(private tokenService: TokenService, private climaService: ClimaService) { }
 
@@ -22,14 +23,24 @@ export class DashboardComponent implements OnInit {
       nombreUsuario: this.tokenService.getUserName(),
       authorities: this.tokenService.getAuthorities()
     };
-    this.getClima();
+    
+    //Carga el clima por defecto (En córdoba);
+    this.climaService.getClima().subscribe((respuesta) => {
+        this.clima = respuesta;
+      });
+  
   }
 
-  getClima(){
-    this.climaService.getClima().subscribe((respuesta) => {
+  //Permite obtener el clima para una determinada ciudad
+  getClima(ciudad : String){
+    console.log("entra a getclima con param");
+    this.climaService.getClima(ciudad).subscribe((respuesta) => {
       this.clima = respuesta;
     });
-    console.log(this.clima);
+
+  
+    
+    
   }
   
 }

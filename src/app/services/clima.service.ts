@@ -15,6 +15,7 @@ export class ClimaService {
   
   private url;
   private token : string;
+  //private ciudad : String = 'Córdoba, Argentina';
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -35,8 +36,12 @@ export class ClimaService {
 
 
   //devuelve todos los cursos almacenados en la bbdd
-  public getClima(): Observable<Clima> {
-    let endpoint = this.url + '/clima?ciudad=La Quiaca';
+  public getClima(ciudad? : String): Observable<Clima> {
+    console.log(ciudad)
+    ciudad = ciudad || "Cordoba, Argentina";
+    console.log(ciudad)
+
+    let endpoint = this.url + '/clima?ciudad='+ ciudad;
     return this.http.get<Clima>(endpoint, this.httpOptions);
   }
 
