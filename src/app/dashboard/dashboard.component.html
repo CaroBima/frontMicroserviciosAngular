@@ -1,26 +1,53 @@
-<div class="container-fluid m-4">
-
-    <!--     Cards      -->
-    <div class="row justify-content-end me-5">
-        <div class="card" style="width: 18rem;">
-            <img src="../../assets/img/cat3.jpeg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title mb-3"><img src="../../assets/img/icons/brightness-high-fill.svg"> El clima en
-                    {{this.clima?.region}} <img src="../../assets/img/icons/brightness-high-fill.svg"></h5>
-                <p class="card-text">Temperatura: {{this.clima?.tempC}}°C</p>
-                <p class="card-text">Sensación térmica: {{this.clima?.feelslikeC}}</p>
-                <p class="card-text">Humedad: {{this.clima?.humidity}}</p>
-                <p class="card-text">Viento: {{this.clima?.windKph}}km/h</p>
-                <p class="card-text">Última actualización: {{this.clima?.lastUpdated}}</p>
-
-            </div>
-            <div class="card-footer">
-                <div class="d-grid gap-2 col-12 mx-auto">
-                <button class="btn btn-secondary justify-content-md-center" data-bs-toggle="modal"
-                    data-bs-target="#exampleModal">Cambiar ciudad</button>
+<div class="container-fluid  m-4">
+    <div class="row justify-content-md-center">
+        <!-- Info de cultura -->
+        <div class="col-sm-8">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">Programas del Ministerio de Cultura</h5>
+                        <select name="selectProgramasCultura" [(ngModel)]="programaSeleccionado">
+                        <option value="0">Selecciona una opción</option>
+                        <option *ngFor="let programa of programasCultura; let indice=index" [value]="indice">
+                            {{programa.nombre}}
+                        </option>
+                    </select>
+                    <!-- Muestra los detalles del programa seleccionado -->
+                    <div *ngIf="programaSeleccionado !== 0">
+                        <h5 class="mb-3 mt-5">Detalles del programa seleccionado:</h5>
+                        <p>Nombre: {{programasCultura[programaSeleccionado].nombre}}</p>
+                        <div [innerHTML]="programasCultura[programaSeleccionado].descripcion"></div>
+                        <p>Link: <a href="{{programasCultura[programaSeleccionado].link}}" target="_blank">{{programasCultura[programaSeleccionado].link}}</a></p>
+                        <p>Depende de: {{programasCultura[programaSeleccionado].depende_de}}</p>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <!-- Card del clima -->
+        <div class="col-sm-4">
+            <div class="card me-5" style="width: 18rem;">
+                <img src="../../assets/img/cat3.jpeg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title mb-3"><img src="../../assets/img/icons/brightness-high-fill.svg"> El clima en
+                        {{this.clima?.name}} <img src="../../assets/img/icons/brightness-high-fill.svg"></h5>
+                    <p class="card-text">Provincia: {{this.clima?.region}}</p>
+                    <p class="card-text">País: {{this.clima?.country}}</p>
+                    <p classpo="card-text">Temperatura: {{this.clima?.tempC}}°C</p>
+                    <p class="card-text">Sensación térmica: {{this.clima?.feelslikeC}}</p>
+                    <p class="card-text">Humedad: {{this.clima?.humidity}}</p>
+                    <p class="card-text">Viento: {{this.clima?.windKph}}km/h</p>
+                    <p class="card-text">Última actualización: {{this.clima?.lastUpdated}}</p>
+
+                </div>
+                <div class="card-footer">
+                    <div class="d-grid gap-2 col-12 mx-auto">
+                        <button class="btn btn-secondary justify-content-md-center" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal">Cambiar ciudad</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Otra card
             <div class="card" style="width: 18rem;">
                 <img src="../../assets/img/cat1.jpeg" class="card-img-top" alt="...">
@@ -34,6 +61,7 @@
         -->
     </div>
 </div>
+
 <!-- Modal para ingresar una ciudad -->
 <div class="modal" id="exampleModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <!--<div class="modal-dialog" role="document">-->

@@ -18,6 +18,7 @@ export class DashboardComponent implements OnInit {
   programasCultura : Cultura[] = [];
   inputCiudad : String = ''; 
   inputPais : String = '';
+  programaSeleccionado: number = 0;
  
 
   constructor(private tokenService: TokenService, private climaService: ClimaService, private culturaService : ProgramasCulturaService) { }
@@ -53,6 +54,10 @@ export class DashboardComponent implements OnInit {
         return evento;
       });
       console.log(this.programasCultura);
+  }
+
+  public obtenerValorPorPosicion(obj: any, posicion: number): any {
+    return Object.keys(obj)[posicion];
   }
   
 }
