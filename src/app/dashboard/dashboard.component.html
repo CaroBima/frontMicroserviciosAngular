@@ -1,32 +1,54 @@
 <div class="container-fluid  m-4">
     <div class="row">
-        <!-- Info de cultura -->
-        <div class="col-sm-8">
-            <div class="card">
-                <div class="card-body">
-                        <h5 class="card-title mb-3 ">Programas del Ministerio de Cultura</h5>
-                        <select name="selectProgramasCultura" [(ngModel)]="programaSeleccionado">
-                        <option value="0">Selecciona una opción</option>
-                        <option *ngFor="let programa of programasCultura; let indice=index" [value]="indice">
-                            {{programa.nombre}}
-                        </option>
-                    </select>
-                    <!-- Muestra los detalles del programa seleccionado -->
-                    <div *ngIf="programaSeleccionado !== 0">
-                        <h5 class="mb-3 mt-5">Detalles del programa seleccionado:</h5>
-                        <p><b>Nombre:</b> {{programasCultura[programaSeleccionado].nombre}}</p>
-                        <div [innerHTML]="programasCultura[programaSeleccionado].descripcion"></div>
-                        <p><b>Link:</b> <a href="{{programasCultura[programaSeleccionado].link}}" target="_blank"> {{programasCultura[programaSeleccionado].link}}</a></p>
-                        <p><b>Depende de: </b>{{programasCultura[programaSeleccionado].depende_de}}</p>
+        <div class="col-sm-7">
+            <!-- Card de movies -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card" style="width: 18rem;">
+                        <img src="../../assets/img/cat1.jpeg" class="card-img-top" alt="...">
+                        <div class="card-body ">
+                            <h5 class="card-title mb-3">Gato 2</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                                of the
+                                card's content.</p>
+                            <button class="btn btn-secondary justify-content-md-center" data-bs-toggle="modal"
+                                data-bs-target="#movieModal" >Consultar
+                                películas</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Info de cultura -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title mb-3 ">Programas del Ministerio de Cultura</h5>
+                            <select name="selectProgramasCultura" [(ngModel)]="programaSeleccionado">
+                                <option value="0">Selecciona una opción</option>
+                                <option *ngFor="let programa of programasCultura; let indice=index" [value]="indice">
+                                    {{programa.nombre}}
+                                </option>
+                            </select>
+                            <!-- Muestra los detalles del programa seleccionado -->
+                            <div *ngIf="programaSeleccionado !== 0">
+                                <h5 class="mb-3 mt-5">Detalles del programa seleccionado:</h5>
+                                <p><b>Nombre:</b> {{programasCultura[programaSeleccionado].nombre}}</p>
+                                <div [innerHTML]="programasCultura[programaSeleccionado].descripcion"></div>
+                                <p><b>Link:</b> <a href="{{programasCultura[programaSeleccionado].link}}"
+                                        target="_blank">
+                                        {{programasCultura[programaSeleccionado].link}}</a></p>
+                                <p><b>Depende de: </b>{{programasCultura[programaSeleccionado].depende_de}}</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
         <!-- Card del clima -->
         <div class="col-sm-4">
             <div class="card me-5" style="width: 18rem;">
-                <img src="../../assets/img/cielodegrade3.png"  class="card-img-top" alt="Clima">
+                <img src="../../assets/img/cielodegrade3.png" class="card-img-top" alt="Clima">
                 <div class="card-body">
                     <h5 class="card-title mb-3"><img src="../../assets/img/icons/brightness-high-fill.svg"> El clima en
                         {{this.clima?.name}} <img src="../../assets/img/icons/brightness-high-fill.svg"></h5>
@@ -38,7 +60,7 @@
                     <p class="card-text"><b>Viento:</b> {{this.clima?.windKph}}km/h</p>
                     <p class="card-text"><b>Última actualización:</b> {{this.clima?.lastUpdated}}</p>
                 </div>
-                <img src="../../assets/img/greengrass3.png"  class="card-img-top" alt="Clima">
+                <img src="../../assets/img/greengrass3.png" class="card-img-top" alt="Clima">
                 <div class="card-footer">
                     <div class="d-grid gap-2 col-12 mx-auto">
                         <button class="btn btn-secondary justify-content-md-center" data-bs-toggle="modal"
@@ -47,20 +69,11 @@
                 </div>
             </div>
         </div>
-
-        <!-- Otra card
-            <div class="card" style="width: 18rem;">
-                <img src="../../assets/img/cat1.jpeg" class="card-img-top" alt="...">
-                <div class="card-body ">
-                    <h5 class="card-title mb-3">Gato 2</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div> 
-        -->
     </div>
+
+
 </div>
+
 
 <!-- Modal para ingresar una ciudad -->
 <div class="modal" id="ciudadModal" role="dialog" aria-labelledby="ciudadModal" aria-hidden="true">
@@ -91,3 +104,31 @@
             </div>
         </div>
     </div>
+</div>
+
+
+<!-- Modal para ingresar el titulo de la película a buscar -->
+<div class="modal" id="movieModal" role="dialog" aria-labelledby="movieModal" aria-hidden="true">
+    <!--<div class="modal-dialog" role="document">-->
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="movieModalLabel">Buscar Películas</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="inputTitulo" placeholder="Título"
+                        [(ngModel)]="inputTitulo" name="inputTitulo">
+                    <label for="inputTitulo">Película</label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                (click)="getMovies(inputTitulo)">Consultar</button>
+            </div>
+        </div>
+    </div>
+</div>

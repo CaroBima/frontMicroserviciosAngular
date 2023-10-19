@@ -5,6 +5,8 @@ import { ClimaService } from '../services/clima.service';
 import { Clima } from '../models/clima-model';
 import { ProgramasCulturaService } from '../services/programas-cultura.service';
 import { Cultura } from '../models/cultura-model';
+import { MoviesService } from '../services/movies.service';
+import { Movie } from '../models/movie-model';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,9 +21,11 @@ export class DashboardComponent implements OnInit {
   inputCiudad : String = ''; 
   inputPais : String = '';
   programaSeleccionado: number = 0;
+  moviesList : Movie[] = [];
+  inputTitulo : String = '';
  
 
-  constructor(private tokenService: TokenService, private climaService: ClimaService, private culturaService : ProgramasCulturaService) { }
+  constructor(private tokenService: TokenService, private climaService: ClimaService, private culturaService : ProgramasCulturaService, private moviesService : MoviesService) { }
 
   ngOnInit() {
     this.info = {
@@ -46,15 +50,26 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  getCultura(){
-      this.culturaService.getProgramasCultura().subscribe((evento)=>{
-        evento.forEach((x) => {
-          this.programasCultura.push(x);
-        });
-        return evento;
+  getMovies(titulo : String){
+    this.moviesList = []; //limpio la lista para traer los resultados
+    this.moviesService.getMovies(titulo).subscribe((evento)=>{
+      evento.forEach((x) => {
+        this.moviesList.push(x);
       });
-      console.log(this.programasCultura);
+      return evento;
+    });
+    console.log(this.moviesList);
   }
+
+  getCultura(){
+    this.culturaService.getProgramasCultura().subscribe((evento)=>{
+      evento.forEach((x) => {
+        this.programasCultura.push(x);
+      });
+      return evento;
+    });
+    console.log(this.programasCultura);
+}
 
   public obtenerValorPorPosicion(obj: any, posicion: number): any {
     return Object.keys(obj)[posicion];
