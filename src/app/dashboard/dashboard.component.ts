@@ -7,7 +7,11 @@ import { ProgramasCulturaService } from '../services/programas-cultura.service';
 import { Cultura } from '../models/cultura-model';
 import { MoviesService } from '../services/movies.service';
 import { Movie } from '../models/movie-model';
+import { URL_IMAGEN } from '../configuracion';
 
+
+const urlImgConst = `${URL_IMAGEN}`;
+const size = 'w300';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -23,7 +27,7 @@ export class DashboardComponent implements OnInit {
   programaSeleccionado: number = 0;
   moviesList : Movie[] = [];
   inputTitulo : String = '';
- 
+  
 
   constructor(private tokenService: TokenService, private climaService: ClimaService, private culturaService : ProgramasCulturaService, private moviesService : MoviesService) { }
 
@@ -54,6 +58,7 @@ export class DashboardComponent implements OnInit {
     this.moviesList = []; //limpio la lista para traer los resultados
     this.moviesService.getMovies(titulo).subscribe((evento)=>{
       evento.forEach((x) => {
+        x.poster_path = urlImgConst + size + x.poster_path;
         this.moviesList.push(x);
       });
       return evento;

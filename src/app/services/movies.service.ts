@@ -1,11 +1,13 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TokenService } from './token.service';
-import { API_MOVIE_URL } from '../configuracion';
+import { API_MOVIE_URL, URL_IMAGEN } from '../configuracion';
 import { Movie } from '../models/movie-model';
 import { Observable } from 'rxjs';
 
 const urlConst = `${API_MOVIE_URL}`;
+
+const size = 'w100'; 
 
 @Injectable({
   providedIn: 'root'

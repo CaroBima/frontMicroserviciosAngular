@@ -1,23 +1,42 @@
-<div class="container-fluid  m-4">
+<div class="container-fluid justify-content-md-center m-4">
     <div class="row">
         <div class="col-sm-7">
             <!-- Card de movies -->
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="card" style="width: 18rem;">
-                        <img src="../../assets/img/cat1.jpeg" class="card-img-top" alt="...">
+                    <div class="card">
                         <div class="card-body ">
-                            <h5 class="card-title mb-3">Gato 2</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of the
-                                card's content.</p>
-                            <button class="btn btn-secondary justify-content-md-center" data-bs-toggle="modal"
-                                data-bs-target="#movieModal" >Consultar
-                                películas</button>
+                            <div class="card-title mb-3">
+                            <button class=" btn btn-secondary justify-content-md-center" data-bs-toggle="modal"
+                            data-bs-target="#movieModal">Consultar películas</button>
                         </div>
+                            <div class="row row-cols-1 row-cols-md-3 g-4">
+                                <!-- Cards de proyectos-->
+                                <div class="col" *ngFor="let movie of moviesList;">
+                                    <div class="card h-100 text-center">
+                                        <img *ngIf="(movie.poster_path)" src="{{movie.poster_path}}" class="card-img-top movieImage mt-2" alt="{{movie.title}}">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{movie.title}}</h5>
+                                            <p class="card-text">
+                                            <p *ngIf="(movie.overview)"><strong>Título original:</strong> {{movie.original_title}}</p>
+                                            <p *ngIf="(movie.release_date)"><strong>Fecha de lanzamiento: </strong>{{movie.release_date}}</p>
+                                            <p *ngIf="(movie.overview)"><strong>Descripción:</strong> {{movie.overview}}</p>
+                                            <p *ngIf="(movie.vote_average)"><strong>Calificación:</strong> {{movie.vote_average}}</p>
+                                            <p *ngIf="(movie.vote_count)"><strong>Votos:</strong> {{movie.vote_count}}</p>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        
                     </div>
                 </div>
             </div>
+
             <!-- Info de cultura -->
             <div class="row">
                 <div class="col-sm-12">
@@ -45,6 +64,7 @@
                 </div>
             </div>
         </div>
+
         <!-- Card del clima -->
         <div class="col-sm-4">
             <div class="card me-5" style="width: 18rem;">
@@ -69,9 +89,8 @@
                 </div>
             </div>
         </div>
+        <!-- Fin Card del clima -->
     </div>
-
-
 </div>
 
 
@@ -127,7 +146,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-                (click)="getMovies(inputTitulo)">Consultar</button>
+                    (click)="getMovies(inputTitulo)">Consultar</button>
             </div>
         </div>
     </div>
