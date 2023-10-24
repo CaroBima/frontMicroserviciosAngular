@@ -14,9 +14,11 @@
                                 <!-- Cards de proyectos-->
                                 <div class="col" *ngFor="let movie of moviesList;">
                                     <div class="card h-100 text-center">
+                                        <div class="card-header">
+                                            {{movie.title}}
+                                          </div>
                                         <img *ngIf="(movie.poster_path)" src="{{movie.poster_path}}" class="card-img-top movieImage mt-2" alt="{{movie.title}}">
                                         <div class="card-body">
-                                            <h5 class="card-title">{{movie.title}}</h5>
                                             <p class="card-text">
                                             <p *ngIf="(movie.overview)"><strong>Título original:</strong> {{movie.original_title}}</p>
                                             <p *ngIf="(movie.release_date)"><strong>Fecha de lanzamiento: </strong>{{movie.release_date}}</p>
