@@ -12,26 +12,45 @@
                         </div>
                             <div class="row row-cols-1 row-cols-md-3 g-4">
                                 <!-- Cards de proyectos-->
-                                <div class="col" *ngFor="let movie of moviesList;">
-                                    <div class="card h-100 text-center">
-                                        <div class="card-header">
-                                            {{movie.title}}
-                                          </div>
-                                        <img *ngIf="(movie.poster_path)" src="{{movie.poster_path}}" class="card-img-top movieImage mt-2" alt="{{movie.title}}">
-                                        <div class="card-body">
-                                            <p class="card-text">
-                                            <p *ngIf="(movie.overview)"><strong>Título original:</strong> {{movie.original_title}}</p>
-                                            <p *ngIf="(movie.release_date)"><strong>Fecha de lanzamiento: </strong>{{movie.release_date}}</p>
-                                            <p *ngIf="(movie.overview)"><strong>Descripción:</strong> {{movie.overview}}</p>
-                                            <p *ngIf="(movie.vote_average)"><strong>Calificación:</strong> {{movie.vote_average}}</p>
-                                            <p *ngIf="(movie.vote_count)"><strong>Votos:</strong> {{movie.vote_count}}</p>
+                                <ng-container *ngIf="(moviesList.length >0); else templateNoMovieResults">
+                                    <div class="col" *ngFor="let movie of moviesList;">
+                                        <div class="card h-100 text-center">
+                                            <div class="card-header">
+                                                <p><strong>Título:</strong> {{movie.title}}</p>
+                                            </div>
+                                            <div *ngIf="(movie.poster_path)">
+                                                <img  src="{{movie.poster_path}}" class="card-img-top movieImage mt-2" alt="{{movie.title}}">
+                                            </div>
+                                            <div class="card-body">
+                                                <p class="card-text">
+                                                <p *ngIf="(movie.overview)"><strong>Título original:</strong> {{movie.original_title}}</p>
+                                                <p *ngIf="(movie.release_date)"><strong>Fecha de lanzamiento: </strong>{{movie.release_date}}</p>
+                                                <p *ngIf="(movie.overview)"><strong>Descripción:</strong> {{movie.overview}}</p>
+                                                <p *ngIf="(movie.vote_average); else templateSinCalificacion">
+                                                    <strong>Calificación:</strong> {{movie.vote_average}}
+                                                </p>
+                                                <ng-template #templateSinCalificacion>
+                                                    <div><strong>Calificación:</strong> Aún no calificada</div>
+                                                </ng-template>
+                                                
+                                                <p *ngIf="(movie.vote_count); else templateSinVotos"><strong>Votos:</strong> {{movie.vote_count}}</p>
+                                                <ng-template #templateSinVotos>
+                                                    <div><strong>Votos:</strong> Sin votos</div>
+                                                </ng-template>
+                                            </div>
                                         </div>
-
-
                                     </div>
-                                </div>
-
+                                </ng-container>
+                                <ng-template #templateNoMovieResults>
+                                    <div *ngIf="(this.servicioConsultado==true)">
+                                        <div class="alert alert-secondary" role="alert">
+                                            <strong>La búsqueda de "{{inputTitulo}}" no ha devuelto resultados</strong>
+                                        </div>
+                                    </div>
+                                </ng-template>
+         
                             </div>
+
                         </div>
 
                         
@@ -86,7 +105,7 @@
                 <div class="card-footer">
                     <div class="d-grid gap-2 col-12 mx-auto">
                         <button class="btn btn-secondary justify-content-md-center" data-bs-toggle="modal"
-                            data-bs-target="#ciudadModal">Cambiar ciudad</button>
+                            data-bs-target="#noResultsModal">Cambiar ciudad</button>
                     </div>
                 </div>
             </div>

@@ -27,6 +27,7 @@ export class DashboardComponent implements OnInit {
   programaSeleccionado: number = 0;
   moviesList : Movie[] = [];
   inputTitulo : String = '';
+  servicioConsultado : boolean = false;
   
 
   constructor(private tokenService: TokenService, private climaService: ClimaService, private culturaService : ProgramasCulturaService, private moviesService : MoviesService) { }
@@ -58,12 +59,14 @@ export class DashboardComponent implements OnInit {
     this.moviesList = []; //limpio la lista para traer los resultados
     this.moviesService.getMovies(titulo).subscribe((evento)=>{
       evento.forEach((x) => {
-        x.poster_path = urlImgConst + size + x.poster_path;
+        if(x.poster_path){//si hay imagen, completo el path para que se muestre, si no pasa null
+          x.poster_path = urlImgConst + size + x.poster_path;
+        }
         this.moviesList.push(x);
       });
+      this.servicioConsultado = true;
       return evento;
     });
-    console.log(this.moviesList);
   }
 
   getCultura(){
@@ -73,7 +76,6 @@ export class DashboardComponent implements OnInit {
       });
       return evento;
     });
-    console.log(this.programasCultura);
 }
 
   public obtenerValorPorPosicion(obj: any, posicion: number): any {
