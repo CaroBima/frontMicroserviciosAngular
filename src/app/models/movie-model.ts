@@ -4,11 +4,11 @@ export class Movie{
     original_title : string;
     poster_path : string;// (foto)
     overview : string;
-    release_date : Date;
+    release_date : Date | string;
     vote_average : number;
     vote_count : number;
 
-    constructor(id : number, title: string, original_title : string, poster_path : string, overview : string, release_date : Date, vote_average : number, vote_count : number){
+    constructor(id : number, title: string, original_title : string, poster_path : string, overview : string, release_date : Date | string, vote_average : number, vote_count : number){
         this.id = id;
         this.title = title;
         this.original_title = original_title;

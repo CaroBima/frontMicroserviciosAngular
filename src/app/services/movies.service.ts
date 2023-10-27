@@ -16,7 +16,7 @@ export class MoviesService {
 
   private url;
   private token : string;
-  //private ciudad : String = 'Córdoba, Argentina';
+  
 
   httpOptions = {
     headers: new HttpHeaders({

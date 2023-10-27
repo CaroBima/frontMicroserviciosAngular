@@ -5,14 +5,16 @@ import { AppComponent } from './app.component';
 import { RegisterComponent } from './register/register.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { GuardGuard } from './guards/guard.guard';
+import { CulturaComponent } from './cultura/cultura.component';
 
 const routes: Routes = [  
 //{ path: "", component: AppComponent, pathMatch: "full" },
 { path: "login", component: LoginComponent, pathMatch: "full" },
 { path: "registro", component: RegisterComponent, pathMatch: "full", canActivate: [GuardGuard]},
+{ path: 'home', component: DashboardComponent, canActivate: [GuardGuard]},
+{ path: 'cultura', component: CulturaComponent, canActivate: [GuardGuard]},
+{ path: '', component: DashboardComponent, canActivate: [GuardGuard]},
 { path: "**", component: DashboardComponent, pathMatch: "full", canActivate: [GuardGuard]},
-{path: '', component: DashboardComponent, canActivate: [GuardGuard]},
-{path: 'home', component: DashboardComponent, canActivate: [GuardGuard]},
 ];
 
 

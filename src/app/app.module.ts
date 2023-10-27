@@ -12,6 +12,7 @@ import { HeaderComponent } from './header/header.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CookieService } from "ngx-cookie-service";
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { CulturaComponent } from './cultura/cultura.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
     DashboardComponent,
     RegisterComponent,
     FooterComponent,
-    HeaderComponent
+    HeaderComponent,
+    CulturaComponent
   ],
   imports: [
     BrowserModule,
