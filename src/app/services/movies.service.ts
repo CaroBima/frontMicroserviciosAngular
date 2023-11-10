@@ -37,4 +37,9 @@ export class MoviesService {
       let endpoint = this.url + 'search/'+ titulo;
       return this.http.get<Movie[]>(endpoint, this.httpOptions);
   }
+
+  public getUpcomingMovies(): Observable<Movie[]>{
+    let endpoint = this.url + 'upcoming';
+    return this.http.get<Movie[]>(endpoint, this.httpOptions);
+  }
 }

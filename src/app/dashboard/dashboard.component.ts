@@ -11,6 +11,8 @@ import { URL_IMAGEN } from '../configuracion';
 
 const urlImgConst = `${URL_IMAGEN}`;
 const size = 'w300';
+declare const $:any;
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -19,14 +21,15 @@ const size = 'w300';
 export class DashboardComponent implements OnInit {
 
   info: any = {};
-  clima? : Clima;
-  inputCiudad : String = ''; 
-  inputPais : String = '';
   moviesList : Movie[] = [];
+  upcomingMovies : Movie[] = [];
   inputTitulo : String = '';
   servicioConsultado : boolean;
   textoBusqueda : String = 'Esperando resultados de la búsqueda...'
   fechaFormateada : String = '';
+  clima? : Clima;
+  inputCiudad : String = ''; 
+  inputPais : String = '';
 
   constructor(private tokenService: TokenService, private climaService: ClimaService, private moviesService : MoviesService) { 
     this.servicioConsultado = false;
@@ -43,9 +46,14 @@ export class DashboardComponent implements OnInit {
     this.climaService.getClima().subscribe((respuesta) => {
         this.clima = respuesta;
       });
-  
+
+    this.getUpcomingMovies();
       
   }
+
+ /* ngAfterViewInit(){
+    $('#carouselExampleCaptions').carousel()
+  }*/
 
   //Permite obtener el clima para una determinada ciudad
   getClima(ciudad : String, pais : String){
@@ -63,9 +71,8 @@ export class DashboardComponent implements OnInit {
       evento.forEach((x) => {
         if(x.poster_path){//si hay imagen, completo el path para que se muestre, si no pasa null
           x.poster_path = urlImgConst + size + x.poster_path;
-          x.release_date = this.formatearFecha(x.release_date);
-          //falta convertir la fecha para que se muestre dd/mm/yyyy solamente
         }
+        x.release_date = this.formatearFecha(x.release_date);
         this.moviesList.push(x);
       });
       this.servicioConsultado = true;
@@ -74,8 +81,24 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-
  
+  public getUpcomingMovies(){
+      //this.upcomingMovies = [];
+      
+      this.moviesService.getUpcomingMovies().subscribe((evento)=>{
+        evento.forEach((upcomingMovie)=>{
+          if(upcomingMovie.poster_path){
+            upcomingMovie.poster_path = urlImgConst + size + upcomingMovie.poster_path;
+          }
+          upcomingMovie.release_date = this.formatearFecha(upcomingMovie.release_date);
+          this.upcomingMovies.push(upcomingMovie);
+        });
+
+      })
+  }
+ 
+
+
 
   public obtenerValorPorPosicion(obj: any, posicion: number): any {
     return Object.keys(obj)[posicion];

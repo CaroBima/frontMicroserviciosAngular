@@ -1,70 +1,171 @@
-<div class="container-fluid justify-content-md-center m-4">
-    <div class="row">
+<div class="container-fluid text-center m-4">
+    <div class="row row-cols-2 justify-content-center">
         <!-- Columna para la api de las peliculas-->
-        <div class="col-sm-7">
-            <!-- Row de movies -->
-                <div class="col-sm-12">
-                    <div class="card">
-                        <div class="card-body ">
-                            <div class="card-title mb-3">
-                                <button class=" btn btn-secondary justify-content-md-center" data-bs-toggle="modal"
-                                    data-bs-target="#movieModal">Consultar películas</button>
-                            </div>
-                            <ng-container *ngIf="(moviesList.length >0); else templateNoMovieResults">
-                                <div class="row row-cols-1 row-cols-md-3 g-4">
-                                    <!-- Cards de peliculas -->
-                                    <div class="col" *ngFor="let movie of moviesList;">
-                                        <div class="card h-100 text-center">
-                                            <div class="card-header">
-                                                <p><strong>Título:</strong> {{movie.title}}</p>
-                                            </div>
-                                            <div *ngIf="(movie.poster_path)">
-                                                <img src="{{movie.poster_path}}" class="card-img-top movieImage mt-2"
-                                                    alt="{{movie.title}}">
-                                            </div>
-                                            <div class="card-body">
-                                                <p class="card-text">
-                                                <p *ngIf="(movie.overview)"><strong>Título original:</strong>
-                                                    {{movie.original_title}}</p>
-                                                <p *ngIf="(movie.release_date)"><strong>Fecha de lanzamiento:
-                                                    </strong>{{movie.release_date}}</p>
-                                                <p *ngIf="(movie.overview)"><strong>Descripción:</strong>
-                                                    {{movie.overview}}</p>
-                                                <p *ngIf="(movie.vote_average); else templateSinCalificacion">
-                                                    <strong>Calificación:</strong> {{movie.vote_average}}
-                                                </p>
-                                                <ng-template #templateSinCalificacion>
-                                                    <div><strong>Calificación:</strong> Aún no calificada</div>
-                                                </ng-template>
+        <div class="col-8">
+            <!-- carousel de upcoming movies -->
+            <div class="card p-3 mb-3">
+                <div style=" max-width: 30%;">
+                    <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner" *ngFor="let upcomingMovie of upcomingMovies;  let i = index">
+                            <ng-container *ngIf="(i==0); else templateUpcoming">
+                                <div class="carousel-item active">
+                                    <!--<img src="{{upcomingMovie.poster_path}}" class="d-block w-100 upcomginMovie"
+                                        alt="...">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5>{{upcomingMovie.original_title}}</h5>
+                                        <p>Fecha de lanzamiento: {{upcomingMovie.release_date}}</p>
+                                    </div>-->
+                                    <div class="card h-100 text-center">
+                                        <div class="card-header">
+                                            <p><strong>Título:</strong> {{upcomingMovie.title}}</p>
+                                        </div>
+                                        <div *ngIf="(upcomingMovie.poster_path)">
+                                            <img src="{{upcomingMovie.poster_path}}" class="card-img-top movieImage mt-2"
+                                                alt="{{upcomingMovie.title}}">
+                                        </div>
+                                        <div class="card-body">
+                                            <p class="card-text">
+                                            <p *ngIf="(upcomingMovie.overview)"><strong>Título original:</strong>
+                                                {{upcomingMovie.original_title}}</p>
+                                            <p *ngIf="(upcomingMovie.release_date)"><strong>Fecha de lanzamiento:
+                                                </strong>{{upcomingMovie.release_date}}</p>
+                                            <p *ngIf="(upcomingMovie.overview)"><strong>Descripción:</strong>
+                                                {{upcomingMovie.overview}}</p>
+                                            <p *ngIf="(upcomingMovie.vote_average); else templateSinCalificacionCar">
+                                                <strong>Calificación:</strong> {{upcomingMovie.vote_average}}
+                                            </p>
+                                            <ng-template #templateSinCalificacionCar>
+                                                <div><strong>Calificación:</strong> Aún no calificada</div>
+                                            </ng-template>
 
-                                                <p *ngIf="(movie.vote_count); else templateSinVotos">
-                                                    <strong>Votos:</strong> {{movie.vote_count}}</p>
-                                                <ng-template #templateSinVotos>
-                                                    <div><strong>Votos:</strong> Sin votos</div>
-                                                </ng-template>
-                                            </div>
+                                            <p *ngIf="(upcomingMovie.vote_count); else templateSinVotosCar">
+                                                <strong>Votos:</strong> {{upcomingMovie.vote_count}}
+                                            </p>
+                                            <ng-template #templateSinVotosCar>
+                                                <div><strong>Votos:</strong> Sin votos</div>
+                                            </ng-template>
                                         </div>
                                     </div>
                                 </div>
                             </ng-container>
-                            <ng-template #templateNoMovieResults>
-                                <div *ngIf="(this.servicioConsultado==true)">
-                                    <div class="alert alert-info" role="alert">
-                                        <strong>{{textoBusqueda}}</strong>
+                            <ng-template #templateUpcoming>
+                                <div class="carousel-item">
+                                   <!-- <img src="{{upcomingMovie.poster_path}}" class="d-block w-100 upcomginMovie"
+                                        alt="...">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5>{{upcomingMovie.original_title}}</h5>
+                                        <p>Fecha de lanzamiento: {{upcomingMovie.release_date}}</p>
+                                    </div>-->
+                                    <div class="card h-100 text-center">
+                                        <div class="card-header">
+                                            <p><strong>Título:</strong> {{upcomingMovie.title}}</p>
+                                        </div>
+                                        <div *ngIf="(upcomingMovie.poster_path)">
+                                            <img src="{{upcomingMovie.poster_path}}" class="card-img-top movieImage mt-2"
+                                                alt="{{upcomingMovie.title}}">
+                                        </div>
+                                        <div class="card-body">
+                                            <p class="card-text">
+                                            <p *ngIf="(upcomingMovie.overview)"><strong>Título original:</strong>
+                                                {{upcomingMovie.original_title}}</p>
+                                            <p *ngIf="(upcomingMovie.release_date)"><strong>Fecha de lanzamiento:
+                                                </strong>{{upcomingMovie.release_date}}</p>
+                                            <p *ngIf="(upcomingMovie.overview)"><strong>Descripción:</strong>
+                                                {{upcomingMovie.overview}}</p>
+                                            <p *ngIf="(upcomingMovie.vote_average); else templateSinCalificacionCar">
+                                                <strong>Calificación:</strong> {{upcomingMovie.vote_average}}
+                                            </p>
+                                            <ng-template #templateSinCalificacionCar>
+                                                <div><strong>Calificación:</strong> Aún no calificada</div>
+                                            </ng-template>
+
+                                            <p *ngIf="(upcomingMovie.vote_count); else templateSinVotosCar">
+                                                <strong>Votos:</strong> {{upcomingMovie.vote_count}}
+                                            </p>
+                                            <ng-template #templateSinVotosCar>
+                                                <div><strong>Votos:</strong> Sin votos</div>
+                                            </ng-template>
+                                        </div>
                                     </div>
                                 </div>
                             </ng-template>
+
                         </div>
-
-
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
                     </div>
                 </div>
             </div>
+            <!-- fin del carousel de upcoming movies -->
+            <!-- Row de movies -->
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body ">
+                        <div class="card-title mb-3">
+                            <button class=" btn btn-secondary justify-content-md-center" data-bs-toggle="modal"
+                                data-bs-target="#movieModal">Consultar películas</button>
+                        </div>
+                        <!-- Carga las películas traídas como resultado-->
+                        <ng-container *ngIf="(moviesList.length >0); else templateNoMovieResults">
+                            <div class="row row-cols-1 row-cols-md-3 g-4">
+                                <!-- Cards de peliculas -->
+                                <div class="col" *ngFor="let movie of moviesList;">
+                                    <div class="card h-100 text-center">
+                                        <div class="card-header">
+                                            <p><strong>Título:</strong> {{movie.title}}</p>
+                                        </div>
+                                        <div *ngIf="(movie.poster_path)">
+                                            <img src="{{movie.poster_path}}" class="card-img-top movieImage mt-2"
+                                                alt="{{movie.title}}">
+                                        </div>
+                                        <div class="card-body">
+                                            <p class="card-text">
+                                            <p *ngIf="(movie.overview)"><strong>Título original:</strong>
+                                                {{movie.original_title}}</p>
+                                            <p *ngIf="(movie.release_date)"><strong>Fecha de lanzamiento:
+                                                </strong>{{movie.release_date}}</p>
+                                            <p *ngIf="(movie.overview)"><strong>Descripción:</strong>
+                                                {{movie.overview}}</p>
+                                            <p *ngIf="(movie.vote_average); else templateSinCalificacion">
+                                                <strong>Calificación:</strong> {{movie.vote_average}}
+                                            </p>
+                                            <ng-template #templateSinCalificacion>
+                                                <div><strong>Calificación:</strong> Aún no calificada</div>
+                                            </ng-template>
 
-       
-
+                                            <p *ngIf="(movie.vote_count); else templateSinVotos">
+                                                <strong>Votos:</strong> {{movie.vote_count}}
+                                            </p>
+                                            <ng-template #templateSinVotos>
+                                                <div><strong>Votos:</strong> Sin votos</div>
+                                            </ng-template>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-container>
+                        <ng-template #templateNoMovieResults>
+                            <div *ngIf="(this.servicioConsultado==true)">
+                                <div class="alert alert-info" role="alert">
+                                    <strong>{{textoBusqueda}}</strong>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Fin Card de películas -->
         <!-- Card del clima -->
-        <div class="col-sm-4">
+        <div class="col-4">
             <div class="card me-5" style="width: 18rem;">
                 <img src="../../assets/img/cielodegrade3.png" class="card-img-top" alt="Clima">
                 <div class="card-body">
@@ -89,63 +190,63 @@
         </div>
         <!-- Fin Card del clima -->
     </div>
-</div>
-
-
-<!-- Modal para ingresar una ciudad -->
-<div class="modal" id="ciudadModal" role="dialog" aria-labelledby="ciudadModal" aria-hidden="true">
-    <!--<div class="modal-dialog" role="document">-->
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="ciudadModalLabel">Consultar clima</h5>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="inputCiudad" placeholder="Ciudad"
-                        [(ngModel)]="inputCiudad" name="inputCiudad">
-                    <label for="inputCiudad">Ciudad</label>
+    <!-- Modal para ingresar una ciudad -->
+    <div class="modal" id="ciudadModal" role="dialog" aria-labelledby="ciudadModal" aria-hidden="true">
+        <!--<div class="modal-dialog" role="document">-->
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ciudadModalLabel">Consultar clima</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-                <div class="form-floating">
-                    <input type="text" class="form-control" id="inputPais" placeholder="País" [(ngModel)]="inputPais"
-                        name="inputPais">
-                    <label for="inputPais">Pais</label>
+                <div class="modal-body">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="inputCiudad" placeholder="Ciudad"
+                            [(ngModel)]="inputCiudad" name="inputCiudad">
+                        <label for="inputCiudad">Ciudad</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="inputPais" placeholder="País"
+                            [(ngModel)]="inputPais" name="inputPais">
+                        <label for="inputPais">Pais</label>
+                    </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-                    (click)="getClima(inputCiudad, inputPais)">Consultar</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                        (click)="getClima(inputCiudad, inputPais)">Consultar</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
+    <!-- Fin Modal para ingresar una ciudad -->
 
-
-<!-- Modal para ingresar el titulo de la película a buscar -->
-<div class="modal" id="movieModal" role="dialog" aria-labelledby="movieModal" aria-hidden="true">
-    <!--<div class="modal-dialog" role="document">-->
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="movieModalLabel">Buscar Películas</h5>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="inputTitulo" placeholder="Título"
-                        [(ngModel)]="inputTitulo" name="inputTitulo">
-                    <label for="inputTitulo">Película</label>
+    <!-- Modal para ingresar el titulo de la película a buscar -->
+    <div class="modal" id="movieModal" role="dialog" aria-labelledby="movieModal" aria-hidden="true">
+        <!--<div class="modal-dialog" role="document">-->
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="movieModalLabel">Buscar Películas</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-                    (click)="getMovies(inputTitulo)">Consultar</button>
+                <div class="modal-body">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="inputTitulo" placeholder="Título"
+                            [(ngModel)]="inputTitulo" name="inputTitulo">
+                        <label for="inputTitulo">Película</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                        (click)="getMovies(inputTitulo)">Consultar</button>
+                </div>
             </div>
         </div>
     </div>
+    <!-- Fin del Modal para ingresar el titulo de la película a buscar -->
+
 </div>
