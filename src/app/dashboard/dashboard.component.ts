@@ -49,11 +49,10 @@ export class DashboardComponent implements OnInit {
       });
 
     this.getUpcomingMovies();
-      
   }
 
- /* ngAfterViewInit(){
-    $('#carouselExampleCaptions').carousel()
+/*  ngAfterViewInit(){
+    $('#carouselExampleAutoplaying').carousel()
   }*/
 
   //Permite obtener el clima para una determinada ciudad
