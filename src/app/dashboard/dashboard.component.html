@@ -5,103 +5,107 @@
             <!-- carousel de upcoming movies -->
             <div class="card p-3 mb-3">
                 <div style=" max-width: 30%;">
-                    <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner" *ngFor="let upcomingMovie of upcomingMovies;  let i = index">
-                            <ng-container *ngIf="(i==0); else templateUpcoming">
-                                <div class="carousel-item active">
-                                    <!--<img src="{{upcomingMovie.poster_path}}" class="d-block w-100 upcomginMovie"
+                    <ng-container *ngIf="loading">
+                        <img src="./../../assets/img/loading-wtf.gif" class="loading">
+                        <p>Cargando información...</p>
+                    </ng-container>
+
+                    
+                    <ng-container *ngIf="!loading">
+                        <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner" *ngFor="let upcomingMovie of upcomingMovies;  let i = index">
+                                <ng-container *ngIf="(i==0); else templateUpcoming">
+                                    <div class="carousel-item active">
+                                        <div class="card h-100 text-center">
+                                            <div class="card-header">
+                                                <p><strong>Título:</strong> {{upcomingMovie.title}}</p>
+                                            </div>
+                                            <div *ngIf="(upcomingMovie.poster_path)">
+                                                <img src="{{upcomingMovie.poster_path}}"
+                                                    class="card-img-top movieImage mt-2" alt="{{upcomingMovie.title}}">
+                                            </div>
+                                            <div class="card-body">
+                                                <p class="card-text">
+                                                <p *ngIf="(upcomingMovie.overview)"><strong>Título original:</strong>
+                                                    {{upcomingMovie.original_title}}</p>
+                                                <p *ngIf="(upcomingMovie.release_date)"><strong>Fecha de lanzamiento:
+                                                    </strong>{{upcomingMovie.release_date}}</p>
+                                                <p *ngIf="(upcomingMovie.overview)"><strong>Descripción:</strong>
+                                                    {{upcomingMovie.overview}}</p>
+                                                <p
+                                                    *ngIf="(upcomingMovie.vote_average); else templateSinCalificacionCar">
+                                                    <strong>Calificación:</strong> {{upcomingMovie.vote_average}}
+                                                </p>
+                                                <ng-template #templateSinCalificacionCar>
+                                                    <div><strong>Calificación:</strong> Aún no calificada</div>
+                                                </ng-template>
+
+                                                <p *ngIf="(upcomingMovie.vote_count); else templateSinVotosCar">
+                                                    <strong>Votos:</strong> {{upcomingMovie.vote_count}}
+                                                </p>
+                                                <ng-template #templateSinVotosCar>
+                                                    <div><strong>Votos:</strong> Sin votos</div>
+                                                </ng-template>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                                <ng-template #templateUpcoming>
+                                    <div class="carousel-item">
+                                        <!-- <img src="{{upcomingMovie.poster_path}}" class="d-block w-100 upcomginMovie"
                                         alt="...">
                                     <div class="carousel-caption d-none d-md-block">
                                         <h5>{{upcomingMovie.original_title}}</h5>
                                         <p>Fecha de lanzamiento: {{upcomingMovie.release_date}}</p>
                                     </div>-->
-                                    <div class="card h-100 text-center">
-                                        <div class="card-header">
-                                            <p><strong>Título:</strong> {{upcomingMovie.title}}</p>
-                                        </div>
-                                        <div *ngIf="(upcomingMovie.poster_path)">
-                                            <img src="{{upcomingMovie.poster_path}}" class="card-img-top movieImage mt-2"
-                                                alt="{{upcomingMovie.title}}">
-                                        </div>
-                                        <div class="card-body">
-                                            <p class="card-text">
-                                            <p *ngIf="(upcomingMovie.overview)"><strong>Título original:</strong>
-                                                {{upcomingMovie.original_title}}</p>
-                                            <p *ngIf="(upcomingMovie.release_date)"><strong>Fecha de lanzamiento:
-                                                </strong>{{upcomingMovie.release_date}}</p>
-                                            <p *ngIf="(upcomingMovie.overview)"><strong>Descripción:</strong>
-                                                {{upcomingMovie.overview}}</p>
-                                            <p *ngIf="(upcomingMovie.vote_average); else templateSinCalificacionCar">
-                                                <strong>Calificación:</strong> {{upcomingMovie.vote_average}}
-                                            </p>
-                                            <ng-template #templateSinCalificacionCar>
-                                                <div><strong>Calificación:</strong> Aún no calificada</div>
-                                            </ng-template>
+                                        <div class="card h-100 text-center">
+                                            <div class="card-header">
+                                                <p><strong>Título:</strong> {{upcomingMovie.title}}</p>
+                                            </div>
+                                            <div *ngIf="(upcomingMovie.poster_path)">
+                                                <img src="{{upcomingMovie.poster_path}}"
+                                                    class="card-img-top movieImage mt-2" alt="{{upcomingMovie.title}}">
+                                            </div>
+                                            <div class="card-body">
+                                                <p class="card-text">
+                                                <p *ngIf="(upcomingMovie.overview)"><strong>Título original:</strong>
+                                                    {{upcomingMovie.original_title}}</p>
+                                                <p *ngIf="(upcomingMovie.release_date)"><strong>Fecha de lanzamiento:
+                                                    </strong>{{upcomingMovie.release_date}}</p>
+                                                <p *ngIf="(upcomingMovie.overview)"><strong>Descripción:</strong>
+                                                    {{upcomingMovie.overview}}</p>
+                                                <p
+                                                    *ngIf="(upcomingMovie.vote_average); else templateSinCalificacionCar">
+                                                    <strong>Calificación:</strong> {{upcomingMovie.vote_average}}
+                                                </p>
+                                                <ng-template #templateSinCalificacionCar>
+                                                    <div><strong>Calificación:</strong> Aún no calificada</div>
+                                                </ng-template>
 
-                                            <p *ngIf="(upcomingMovie.vote_count); else templateSinVotosCar">
-                                                <strong>Votos:</strong> {{upcomingMovie.vote_count}}
-                                            </p>
-                                            <ng-template #templateSinVotosCar>
-                                                <div><strong>Votos:</strong> Sin votos</div>
-                                            </ng-template>
+                                                <p *ngIf="(upcomingMovie.vote_count); else templateSinVotosCar">
+                                                    <strong>Votos:</strong> {{upcomingMovie.vote_count}}
+                                                </p>
+                                                <ng-template #templateSinVotosCar>
+                                                    <div><strong>Votos:</strong> Sin votos</div>
+                                                </ng-template>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </ng-container>
-                            <ng-template #templateUpcoming>
-                                <div class="carousel-item">
-                                   <!-- <img src="{{upcomingMovie.poster_path}}" class="d-block w-100 upcomginMovie"
-                                        alt="...">
-                                    <div class="carousel-caption d-none d-md-block">
-                                        <h5>{{upcomingMovie.original_title}}</h5>
-                                        <p>Fecha de lanzamiento: {{upcomingMovie.release_date}}</p>
-                                    </div>-->
-                                    <div class="card h-100 text-center">
-                                        <div class="card-header">
-                                            <p><strong>Título:</strong> {{upcomingMovie.title}}</p>
-                                        </div>
-                                        <div *ngIf="(upcomingMovie.poster_path)">
-                                            <img src="{{upcomingMovie.poster_path}}" class="card-img-top movieImage mt-2"
-                                                alt="{{upcomingMovie.title}}">
-                                        </div>
-                                        <div class="card-body">
-                                            <p class="card-text">
-                                            <p *ngIf="(upcomingMovie.overview)"><strong>Título original:</strong>
-                                                {{upcomingMovie.original_title}}</p>
-                                            <p *ngIf="(upcomingMovie.release_date)"><strong>Fecha de lanzamiento:
-                                                </strong>{{upcomingMovie.release_date}}</p>
-                                            <p *ngIf="(upcomingMovie.overview)"><strong>Descripción:</strong>
-                                                {{upcomingMovie.overview}}</p>
-                                            <p *ngIf="(upcomingMovie.vote_average); else templateSinCalificacionCar">
-                                                <strong>Calificación:</strong> {{upcomingMovie.vote_average}}
-                                            </p>
-                                            <ng-template #templateSinCalificacionCar>
-                                                <div><strong>Calificación:</strong> Aún no calificada</div>
-                                            </ng-template>
+                                </ng-template>
 
-                                            <p *ngIf="(upcomingMovie.vote_count); else templateSinVotosCar">
-                                                <strong>Votos:</strong> {{upcomingMovie.vote_count}}
-                                            </p>
-                                            <ng-template #templateSinVotosCar>
-                                                <div><strong>Votos:</strong> Sin votos</div>
-                                            </ng-template>
-                                        </div>
-                                    </div>
-                                </div>
-                            </ng-template>
-
+                            </div>
+                            <button class="carousel-control-prev" type="button"
+                                data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button"
+                                data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
                         </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
-                            data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
-                            data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
-                    </div>
+                    </ng-container>
                 </div>
             </div>
             <!-- fin del carousel de upcoming movies -->
@@ -248,5 +252,5 @@
         </div>
     </div>
     <!-- Fin del Modal para ingresar el titulo de la película a buscar -->
-
+    
 </div>

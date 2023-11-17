@@ -30,6 +30,7 @@ export class DashboardComponent implements OnInit {
   clima? : Clima;
   inputCiudad : String = ''; 
   inputPais : String = '';
+  loading: boolean = true;
 
   constructor(private tokenService: TokenService, private climaService: ClimaService, private moviesService : MoviesService) { 
     this.servicioConsultado = false;
@@ -84,7 +85,7 @@ export class DashboardComponent implements OnInit {
  
   public getUpcomingMovies(){
       //this.upcomingMovies = [];
-      
+      this.loading = true;
       this.moviesService.getUpcomingMovies().subscribe((evento)=>{
         evento.forEach((upcomingMovie)=>{
           if(upcomingMovie.poster_path){
@@ -92,6 +93,7 @@ export class DashboardComponent implements OnInit {
           }
           upcomingMovie.release_date = this.formatearFecha(upcomingMovie.release_date);
           this.upcomingMovies.push(upcomingMovie);
+          this.loading = false;
         });
 
       })

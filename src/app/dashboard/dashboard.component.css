@@ -9,3 +9,7 @@
     display: block;
     margin: auto;
 }
+
+.loading{
+    width: 10rem;
+}
