@@ -1,12 +1,14 @@
 <div class="container-fluid text-center m-4">
-    <div class="row row-cols-2 justify-content-center">
+
+    <div class="row row-cols-2 justify-content-center ">
+
         <!-- Columna para la api de las peliculas-->
-        <div class="col-8">
+        <div class="col-8 justify-content-center">
             <!-- carousel de upcoming movies -->
-            <div class="card p-3 mb-3">
-                <div style=" max-width: 30%;">
+            <div class="card p-3 mb-3 ">
+                <div>
                     <ng-container *ngIf="loading">
-                        <img src="./../../assets/img/loading-wtf.gif" class="loading">
+                        <img src="./../../assets/img/Spinner-3.gif" class="loading">
                         <p>Cargando información...</p>
                     </ng-container>
 
@@ -168,6 +170,7 @@
             </div>
         </div>
         <!-- Fin Card de películas -->
+
         <!-- Card del clima -->
         <div class="col-4">
             <div class="card me-5" style="width: 18rem;">

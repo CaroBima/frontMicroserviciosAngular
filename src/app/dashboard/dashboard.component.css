@@ -1,5 +1,5 @@
 .movieImage{
-    width: 10rem;
+    width: 15rem;
     display: block;
     margin: auto;
 }
@@ -11,5 +11,5 @@
 }
 
 .loading{
-    width: 10rem;
+    width: 7rem;
 }
