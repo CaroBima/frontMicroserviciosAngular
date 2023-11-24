@@ -14,6 +14,7 @@ import { CookieService } from "ngx-cookie-service";
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { CulturaComponent } from './cultura/cultura.component';
 import { MovieSearchComponent } from './movie-search/movie-search.component';
+import { ClimaComponent } from './clima/clima.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { MovieSearchComponent } from './movie-search/movie-search.component';
     FooterComponent,
     HeaderComponent,
     CulturaComponent,
-    MovieSearchComponent
+    MovieSearchComponent,
+    ClimaComponent
   ],
   imports: [
     BrowserModule,
