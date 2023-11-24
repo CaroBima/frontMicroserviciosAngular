@@ -78,6 +78,10 @@ export class DashboardComponent implements OnInit {
       this.servicioConsultado = true;
       this.textoBusqueda = "La búsqueda de " + titulo + " no ha devuelto resultados";
       return evento;
+    },
+    err => {
+        console.log(err);
+
     });
   }
 

@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CookieService } from "ngx-cookie-service";
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { CulturaComponent } from './cultura/cultura.component';
+import { MovieSearchComponent } from './movie-search/movie-search.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { CulturaComponent } from './cultura/cultura.component';
     RegisterComponent,
     FooterComponent,
     HeaderComponent,
-    CulturaComponent
+    CulturaComponent,
+    MovieSearchComponent
   ],
   imports: [
     BrowserModule,

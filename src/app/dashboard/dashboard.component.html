@@ -13,7 +13,7 @@
                 <!--carousel-->
                 <div id="carouselExampleAutoplaying" class="carousel slide p-3 mb-3" data-bs-ride="carousel">
                     <div class="carousel-inner"
-                        *ngFor="let upcomingMovie of upcomingMovies;  let i = index ;first as isFirst">
+                        *ngFor="let upcomingMovie of upcomingMovies;  let i = index ; first as isFirst">
                         <div [ngClass]="isFirst ? 'carousel-item active' : 'carousel-item' ">
                             <div class="card h-100 text-center">
                                 <div class="card-header">
