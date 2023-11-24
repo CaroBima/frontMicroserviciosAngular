@@ -1,5 +1,5 @@
 <div class="container-fluid text-center m-4">
-    <div class="row row-cols-2 justify-content-center ">
+    <div class="row justify-content-center ">
         <!-- Columna para la api de las peliculas-->
         <div class="col-8 justify-content-center">
             <!-- carousel de upcoming movies -->
@@ -63,66 +63,7 @@
             </ng-container>
 
             <!-- fin del carousel de upcoming movies -->
-            <!-- Row de movies -->
-            <div class="col-sm-12">
-                <div class="card">
-                    <div class="card-body ">
-                        <div class="card-title mb-3">
-                            <button class=" btn btn-secondary justify-content-md-center" data-bs-toggle="modal"
-                                data-bs-target="#movieModal">Consultar películas</button>
-                        </div>
-                        <!-- Carga las películas traídas como resultado-->
-                        <ng-container *ngIf="(moviesList.length >0); else templateNoMovieResults">
-                            <div class="row row-cols-1 row-cols-md-3 g-4">
-                                <!-- Cards de peliculas -->
-                                <div class="col" *ngFor="let movie of moviesList;">
-                                    <div class="card h-100 text-center">
-                                        <div class="card-header">
-                                            <p><strong>Título:</strong> {{movie.title}}</p>
-                                        </div>
-                                        <div *ngIf="(movie.poster_path)">
-                                            <img src="{{movie.poster_path}}" class="card-img-top movieImage mt-2"
-                                                alt="{{movie.title}}">
-                                        </div>
-                                        <div class="card-body">
-                                            <p class="card-text">
-                                            <p *ngIf="(movie.overview)"><strong>Título original:</strong>
-                                                {{movie.original_title}}</p>
-                                            <p *ngIf="(movie.release_date)"><strong>Fecha de lanzamiento:
-                                                </strong>{{movie.release_date}}</p>
-                                            <p *ngIf="(movie.overview)"><strong>Descripción:</strong>
-                                                {{movie.overview}}</p>
-                                            <p *ngIf="(movie.vote_average); else templateSinCalificacion">
-                                                <strong>Calificación:</strong> {{movie.vote_average}}
-                                            </p>
-                                            <ng-template #templateSinCalificacion>
-                                                <div><strong>Calificación:</strong> Aún no calificada</div>
-                                            </ng-template>
-
-                                            <p *ngIf="(movie.vote_count); else templateSinVotos">
-                                                <strong>Votos:</strong> {{movie.vote_count}}
-                                            </p>
-                                            <ng-template #templateSinVotos>
-                                                <div><strong>Votos:</strong> Sin votos</div>
-                                            </ng-template>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </ng-container>
-                        <ng-template #templateNoMovieResults>
-                            <div *ngIf="(this.servicioConsultado==true)">
-                                <div class="alert alert-info" role="alert">
-                                    <strong>{{textoBusqueda}}</strong>
-                                </div>
-                            </div>
-                        </ng-template>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Fin Card de películas -->
-
+        
         <!-- Card del clima -->
         <div class="col-4">
             <div class="card me-5" style="width: 18rem;">
@@ -181,31 +122,6 @@
     </div>
     <!-- Fin Modal para ingresar una ciudad -->
 
-    <!-- Modal para ingresar el titulo de la película a buscar -->
-    <div class="modal" id="movieModal" role="dialog" aria-labelledby="movieModal" aria-hidden="true">
-        <!--<div class="modal-dialog" role="document">-->
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="movieModalLabel">Buscar Películas</h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="inputTitulo" placeholder="Título"
-                            [(ngModel)]="inputTitulo" name="inputTitulo">
-                        <label for="inputTitulo">Película</label>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-                        (click)="getMovies(inputTitulo)">Consultar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Fin del Modal para ingresar el titulo de la película a buscar -->
+ 
 
 </div>

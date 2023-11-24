@@ -24,7 +24,6 @@ export class DashboardComponent implements OnInit {
   moviesList : Movie[] = [];
   upcomingMovies : Movie[] = [];
   inputTitulo : String = '';
-  servicioConsultado : boolean;
   textoBusqueda : String = 'Esperando resultados de la búsqueda...'
   fechaFormateada : String = '';
   clima? : Clima;
@@ -33,7 +32,7 @@ export class DashboardComponent implements OnInit {
   loading: boolean = true;
 
   constructor(private tokenService: TokenService, private climaService: ClimaService, private moviesService : MoviesService) { 
-    this.servicioConsultado = false;
+    //this.servicioConsultado = false;
   }
 
   ngOnInit() {
@@ -63,28 +62,7 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  getMovies(titulo : String){
-    this.servicioConsultado = false;
-    this.textoBusqueda = 'Esperando resultados de la búsqueda para ' + titulo;
-    this.moviesList = []; //limpio la lista para traer los resultados
-    this.moviesService.getMovies(titulo).subscribe((evento)=>{
-      evento.forEach((x) => {
-        if(x.poster_path){//si hay imagen, completo el path para que se muestre, si no pasa null
-          x.poster_path = urlImgConst + size + x.poster_path;
-        }
-        x.release_date = this.formatearFecha(x.release_date);
-        this.moviesList.push(x);
-      });
-      this.servicioConsultado = true;
-      this.textoBusqueda = "La búsqueda de " + titulo + " no ha devuelto resultados";
-      return evento;
-    },
-    err => {
-        console.log(err);
-
-    });
-  }
-
+ 
  
   public getUpcomingMovies(){
       //this.upcomingMovies = [];
