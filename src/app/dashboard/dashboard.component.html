@@ -1,7 +1,7 @@
 <div class="container-fluid text-center m-4">
     <div class="row justify-content-center ">
         <!-- Columna para la api de las peliculas-->
-        <div class="col-7 justify-content-center">
+        <div class="col-8 justify-content-center">
             <!-- carousel de upcoming movies -->
             <div class="p-3 mb-3" *ngIf="loading">
                 <!-- Muestra el aviso de cargando hasta que trae la info de la api-->
@@ -10,11 +10,10 @@
             </div>
             <!--una vez que tiene la info de la api sigue acá-->
             <ng-container *ngIf="!loading">
-                <!--carousel-->
-                <div id="carouselExampleAutoplaying" class="carousel slide p-3 mb-3" data-bs-ride="carousel">
-                    <div class="carousel-inner"
-                        *ngFor="let upcomingMovie of upcomingMovies;  let i = index ; first as isFirst">
-                        <div [ngClass]="isFirst ? 'carousel-item active' : 'carousel-item' ">
+                <ng-container  *ngIf="(upcomingMovies.length >0);">
+                    <div class="row">
+                        <!-- Cards de peliculas -->
+                        <div class="col" *ngFor="let upcomingMovie of upcomingMovies">
                             <div class="card h-100 text-center">
                                 <div class="card-header">
                                     <p><strong>Título:</strong> {{upcomingMovie.title}}</p>
@@ -31,40 +30,33 @@
                                         </strong>{{upcomingMovie.release_date}}</p>
                                     <p *ngIf="(upcomingMovie.overview)"><strong>Descripción:</strong>
                                         {{upcomingMovie.overview}}</p>
-                                    <p *ngIf="(upcomingMovie.vote_average); else templateSinCalificacionCar">
+                                    <p *ngIf="(upcomingMovie.vote_average); else templateSinCalificacion">
                                         <strong>Calificación:</strong> {{upcomingMovie.vote_average}}
                                     </p>
-                                    <ng-template #templateSinCalificacionCar>
+                                    <ng-template #templateSinCalificacion>
                                         <div><strong>Calificación:</strong> Aún no calificada</div>
                                     </ng-template>
 
-                                    <p *ngIf="(upcomingMovie.vote_count); else templateSinVotosCar">
+                                    <p *ngIf="(upcomingMovie.vote_count); else templateSinVotos">
                                         <strong>Votos:</strong> {{upcomingMovie.vote_count}}
                                     </p>
-                                    <ng-template #templateSinVotosCar>
+                                    <ng-template #templateSinVotos>
                                         <div><strong>Votos:</strong> Sin votos</div>
                                     </ng-template>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
-                        data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
-                        data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
-                </div>
-                <!-- fin carousel-->
+                </ng-container >
             </ng-container>
-
             <!-- fin del carousel de upcoming movies -->
-        
 
- 
-</div>
-</div>
+
+
+
+        </div>
+        <div class="col-3">
+            <app-clima></app-clima>
+
+        </div>
+    </div>
