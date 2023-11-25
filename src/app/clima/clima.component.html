@@ -1,1 +1,57 @@
-<p>clima works!</p>
+      <!-- Card del clima -->
+      <div class="col-4">
+        <div class="card me-5" style="width: 18rem;">
+            <img src="../../assets/img/cielodegrade3.png" class="card-img-top" alt="Clima">
+            <div class="card-body">
+                <h5 class="card-title mb-3"><img src="../../assets/img/icons/brightness-high-fill.svg"> El clima en
+                    {{this.clima?.name}} <img src="../../assets/img/icons/brightness-high-fill.svg"></h5>
+                <p class="card-text"><b>Provincia:</b> {{this.clima?.region}}</p>
+                <p class="card-text"><b>País:</b> {{this.clima?.country}}</p>
+                <p classpo="card-text"><b>Temperatura:</b> {{this.clima?.tempC}}°C</p>
+                <p class="card-text"><b>Sensación térmica:</b> {{this.clima?.feelslikeC}}</p>
+                <p class="card-text"><b>Humedad:</b> {{this.clima?.humidity}}</p>
+                <p class="card-text"><b>Viento:</b> {{this.clima?.windKph}}km/h</p>
+                <p class="card-text"><b>Última actualización:</b> {{this.clima?.lastUpdated}}</p>
+            </div>
+            <img src="../../assets/img/greengrass3.png" class="card-img-top" alt="Clima">
+            <div class="card-footer">
+                <div class="d-grid gap-2 col-12 mx-auto">
+                    <button class="btn btn-secondary justify-content-md-center" data-bs-toggle="modal"
+                        data-bs-target="#noResultsModal">Cambiar ciudad</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Fin Card del clima -->
+
+<!-- Modal para ingresar una ciudad -->
+<div class="modal" id="ciudadModal" role="dialog" aria-labelledby="ciudadModal" aria-hidden="true">
+    <!--<div class="modal-dialog" role="document">-->
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ciudadModalLabel">Consultar clima</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="inputCiudad" placeholder="Ciudad"
+                        [(ngModel)]="inputCiudad" name="inputCiudad">
+                    <label for="inputCiudad">Ciudad</label>
+                </div>
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="inputPais" placeholder="País"
+                        [(ngModel)]="inputPais" name="inputPais">
+                    <label for="inputPais">Pais</label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                    (click)="getClima(inputCiudad, inputPais)">Consultar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Fin Modal para ingresar una ciudad -->

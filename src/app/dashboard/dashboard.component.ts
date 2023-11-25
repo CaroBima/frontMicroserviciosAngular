@@ -54,13 +54,6 @@ export class DashboardComponent implements OnInit {
     $('#carouselExampleAutoplaying').carousel()
   }*/
 
-  //Permite obtener el clima para una determinada ciudad
-  getClima(ciudad : String, pais : String){
-    const ciudadYPais = ciudad + ', ' + pais;
-    this.climaService.getClima(ciudadYPais).subscribe((respuesta) => {
-      this.clima = respuesta;
-    });
-  }
 
  
  
