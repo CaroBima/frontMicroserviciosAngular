@@ -1,27 +1,33 @@
 # FrontEnAngular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.2.
+## 🛠️ Requirements
+* Node.js installed (recommended version: v16.x for Angular 14)
 
-## Development server
+* Angular CLI version 14.2
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+* PowerShell (on Windows)
 
-## Code scaffolding
+## 📦 Install dependencies
+In the terminal, from the project root folder: 
+`npm install`
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## 🚀 Run the application
+`ng serve --open`
 
-## Build
+The --open flag will automatically open the app in your browser at http://localhost:4200.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### ⚠️ If you see this error:
+`Script execution is disabled on this system.`
 
-## Running unit tests
+Then:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+1. Open PowerShell as administrator.
+2. Run this command:
+`Set-ExecutionPolicy RemoteSigned`
+3. Confirm by typing Y (yes) or S (Sí) and pressing Enter.
 
-## Running end-to-end tests
+## 🔧 Install Angular CLI (if it's not installed or you want a specific version)
+`npm install -g @angular/cli@14.2`
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## 📋 Check Angular and CLI version
+`ng version`
