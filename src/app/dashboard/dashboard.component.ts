@@ -7,31 +7,32 @@ import { MoviesService } from '../services/movies.service';
 import { Movie } from '../models/movie-model';
 import { URL_IMAGEN } from '../configuracion';
 
-
-
 const urlImgConst = `${URL_IMAGEN}`;
 const size = 'w300';
-declare const $:any;
+declare const $: any;
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
-
   info: any = {};
-  moviesList : Movie[] = [];
-  upcomingMovies : Movie[] = [];
-  inputTitulo : String = '';
-  textoBusqueda : String = 'Esperando resultados de la búsqueda...'
-  fechaFormateada : String = '';
-  clima? : Clima;
-  inputCiudad : String = ''; 
-  inputPais : String = '';
+  moviesList: Movie[] = [];
+  upcomingMovies: Movie[] = [];
+  inputTitulo: String = '';
+  textoBusqueda: String = 'Esperando resultados de la búsqueda...';
+  fechaFormateada: String = '';
+  clima?: Clima;
+  inputCiudad: String = '';
+  inputPais: String = '';
   loading: boolean = true;
 
-  constructor(private tokenService: TokenService, private climaService: ClimaService, private moviesService : MoviesService) { 
+  constructor(
+    private tokenService: TokenService,
+    private climaService: ClimaService,
+    private moviesService: MoviesService
+  ) {
     //this.servicioConsultado = false;
   }
 
@@ -39,26 +40,23 @@ export class DashboardComponent implements OnInit {
     this.info = {
       token: this.tokenService.getToken(),
       nombreUsuario: this.tokenService.getUserName(),
-      authorities: this.tokenService.getAuthorities()
+      authorities: this.tokenService.getAuthorities(),
     };
-    
+
     //Carga el clima por defecto (En córdoba);
     this.climaService.getClima().subscribe((respuesta) => {
-        this.clima = respuesta;
-      });
+      this.clima = respuesta;
+    });
 
     this.getUpcomingMovies();
   }
 
-/*  ngAfterViewInit(){
+  /*  ngAfterViewInit(){
     $('#carouselExampleAutoplaying').carousel()
   }*/
 
-
- 
- 
-  public getUpcomingMovies(){
-      //this.upcomingMovies = [];
+  /*public getUpcomingMovies(){
+      this.upcomingMovies = [];
       this.loading = true;
       this.moviesService.getUpcomingMovies().subscribe((evento)=>{
         evento.forEach((upcomingMovie)=>{
@@ -72,10 +70,34 @@ export class DashboardComponent implements OnInit {
 
       })
       console.log(this.upcomingMovies);
+  }*/
+
+  public getUpcomingMovies() {
+    this.upcomingMovies = [];
+    this.loading = true;
+
+    this.moviesService.getUpcomingMovies().subscribe({
+      next: (evento) => {
+        if (evento && evento.length) {
+          evento.forEach((upcomingMovie) => {
+            if (upcomingMovie.poster_path) {
+              upcomingMovie.poster_path = urlImgConst + size + upcomingMovie.poster_path;
+            }
+            upcomingMovie.release_date = this.formatearFecha(upcomingMovie.release_date);
+            this.upcomingMovies.push(upcomingMovie);
+          });
+        } else {
+          console.warn('No se recibieron películas (evento está vacío o null)');
+        }
+        this.loading = false;
+        console.log('Películas procesadas:', this.upcomingMovies);
+      },
+      error: (err) => {
+        this.loading = false;
+        console.error('Error al obtener upcoming movies:', err);
+      },
+    });
   }
- 
-
-
 
   public obtenerValorPorPosicion(obj: any, posicion: number): any {
     return Object.keys(obj)[posicion];
@@ -83,22 +105,22 @@ export class DashboardComponent implements OnInit {
 
   /**
    * Método que permite formatear la fecha para que se muestre como dd-MM-yyyy
-   * @param fecha 
+   * @param fecha
    * @returns fechaFormateada : string
    */
-  formatearFecha(fecha : Date | string) : string{
+  formatearFecha(fecha: Date | string): string {
     let fechaDate: Date = new Date();
-    let fechaFormateada : string = '';
+    let fechaFormateada: string = '';
 
-    if (fecha) { //si no es date lo paso a date
+    if (fecha) {
+      //si no es date lo paso a date
       if (fecha instanceof Date) {
-        fechaDate = fecha
+        fechaDate = fecha;
       } else {
         fechaDate = new Date(fecha);
       }
     }
-    if(fechaDate != null && fechaDate instanceof Date){
-
+    if (fechaDate != null && fechaDate instanceof Date) {
       const dia: number = fechaDate.getDate();
       const mes: number = fechaDate.getMonth() + 1;
       const anio: number = fechaDate.getFullYear();
@@ -107,9 +129,7 @@ export class DashboardComponent implements OnInit {
       const mesString: string = mes < 10 ? `0${mes}` : mes.toString();
 
       fechaFormateada = `${diaString}-${mesString}-${anio}`;
-      
     }
     return fechaFormateada;
-    
   }
 }

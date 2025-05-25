@@ -11,7 +11,7 @@ import { MovieSearchComponent } from './movie-search/movie-search.component';
 const routes: Routes = [  
 //{ path: "", component: AppComponent, pathMatch: "full" },
 { path: "login", component: LoginComponent, pathMatch: "full" },
-{ path: "registro", component: RegisterComponent, pathMatch: "full", canActivate: [GuardGuard]},
+{ path: "registro", component: RegisterComponent, pathMatch: "full"},
 { path: 'home', component: DashboardComponent, canActivate: [GuardGuard]},
 { path: 'cultura', component: CulturaComponent, canActivate: [GuardGuard]},
 { path: 'movsearch', component: MovieSearchComponent, canActivate: [GuardGuard]},

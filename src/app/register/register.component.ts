@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../services/users.service';
+import {AuthService} from '../services/auth.service';
 import { Router } from '@angular/router';
+import { NuevoUsuario } from '../models/nuevo-usuario';
+import { RolUsuario } from '../models/rol-usuario';
 
 @Component({
   selector: 'app-register',
@@ -9,23 +12,37 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
   nombreUsuario!: string;
-  password!: string;
-  confirmPassword!: string;
-  passwordError!: boolean;
+  contrasenia!: string;
+  confirmContrasenia!: string;
+  contraseniaError!: boolean;
+  email!: string;
 
-  constructor(public userService: UsersService, public router: Router) {}
+
+  user : NuevoUsuario = {
+    nombreUsuario: this.nombreUsuario, 
+    email: this.email,
+    contrasenia: this.contrasenia,
+    rolUsuario:  new RolUsuario('USER')
+  };
+  constructor(public userService: UsersService, public router: Router, public authService : AuthService) {}
 
   ngOnInit(): void {
   }
 
-/*
   register() {
-    const user = { email: this.nombreUsuario, password: this.password };
-      this.userService.register(user).subscribe(data => {
-      this.userService.setToken(data.token);
-      this.router.navigateByUrl("/");
+    this.user = { 
+      nombreUsuario: this.nombreUsuario, 
+      email: this.email, 
+      rolUsuario:  new RolUsuario('USER'), 
+      contrasenia: this.contrasenia 
+    };
+
+    this.authService.registro(this.user).subscribe(data => {
+        this.userService.setToken(data.token);
+        this.router.navigateByUrl("/");
+      console.log('registro ', this.user);
     });
   }
-  */
+  
 }
 
