@@ -10,7 +10,7 @@ import { CookieService } from 'ngx-cookie-service';
 export class UsersService {
   constructor(private http: HttpClient, private cookies: CookieService) {}
 
-  /*
+  
   setToken(token: string) {
     this.cookies.set("token", token);
   }
@@ -21,6 +21,6 @@ export class UsersService {
 
   logout(){
     this.cookies.delete("token");
-  }*/
+  }
   
 }

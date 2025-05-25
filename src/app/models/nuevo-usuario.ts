@@ -1,15 +1,17 @@
+import { RolUsuario } from "./rol-usuario";
+
 export class NuevoUsuario {
-    nombre: string;
+    //nombre: string;
     nombreUsuario: string;
     email: string;
-    roles: string[];
-    password: string;
+    rolUsuario: RolUsuario;
+    contrasenia: string;
 
-    constructor(nombre: string, nombreUsuario: string, email: string, password: string) {
-        this.nombre = nombre;
+    constructor(nombreUsuario: string, email: string, contrasenia: string, rolUsuario : RolUsuario) {
+        //this.nombre = nombre;
         this.nombreUsuario = nombreUsuario;
         this.email = email;
-        this.password = password;
-        this.roles = ['user'];
+        this.contrasenia = contrasenia;
+        this.rolUsuario = rolUsuario;
     }
 }
